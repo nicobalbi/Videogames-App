@@ -1,6 +1,8 @@
 import {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {getAllVideogames} from '../redux/actions'
+import VideogameCard from './VideogameCard'
+import vgImage from '../images/videogames.jpg'
 
 function Home() {
   
@@ -13,14 +15,13 @@ function Home() {
 
   return (
     <div>
+      <h1>Videogames App</h1>
+      {/* <img src={vgImage} alt='vg-img' /> */}
       {
         videogames && videogames.map(e => {
           return (
-            <div key={e.id}>
-              <h1>{e.name}</h1>
-              <img src={e.background_image} alt={e.name} />
-            </div>
-        )
+            <VideogameCard id={e.id} name={e.name} image={e.background_image} genres={e.genres} />
+          )
         })
       }
     </div>
