@@ -9,18 +9,18 @@ function VideogameDetail(props) {
   // const dispatch = useDispatch()
 
   // useEffect(() => {
-  //     dispatch(getVideogameDetail(idVideogame))
+  //     dispatch(getVideogameDetail(idVideogame),[])
   // })
 
   return (
     <div>
-      <p>Detail</p>
+      <h1>Detail</h1>
       {/* <p>{videogame.name}</p>
-      <img src={videogame.background_image} alt={videogame.name} /> */}
+      <img src={videogame.background_image} alt={videogame.name} width='200px' height='250px'/> */}
       {/* <p>
         {
         videogame.genres.map(g => {
-            return (
+            return (  
               <span>{`${g.name} | `}</span>
             )
           })

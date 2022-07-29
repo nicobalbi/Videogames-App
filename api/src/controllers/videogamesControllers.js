@@ -42,11 +42,11 @@ async function getVideogames(req, res, next) {
   try {
     let videogames = await getAllVideogames()
     if (name) videogames = videogames.filter(v => v.name.toLowerCase().includes(name.toLowerCase()))
-    if (videogames.length === 0) return res.send('Ningun juego encontrado')
+    if (!videogames.length) return res.send('Ningun juego encontrado')
     res.send(videogames)
   } catch (error) {
     next(error)
-  }
+  } 
 }
 
 // POST VIDEOGAMES /videogames
@@ -68,6 +68,7 @@ async function postVideogame(req, res, next) {
 }
 
 module.exports = {
+  getAllVideogames,
   getVideogames,
   postVideogame
 }

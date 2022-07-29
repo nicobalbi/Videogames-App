@@ -1,25 +1,16 @@
 const axios = require('axios');
+const { getAllVideogames } = require('./videogamesControllers');
 require('dotenv').config();
 
-const { API_KEY } = process.env;
 
 // GET VIDEOGAMES BY ID /videogame/{idVideogame}
 async function getVideogameByID(req, res, next) {
   const { idVideogame } = req.params
-  try {
-    let videogame = (await axios(`https://api.rawg.io/api/games/${idVideogame}?key=${API_KEY}`)).data
-    if (!videogame) return res.send('Juego no encontrado')
-    res.send({
-      background_image: videogame.background_image,
-      name: videogame.name,
-      genres: videogame.genres,
-      description: videogame.description,
-      released: videogame.released,
-      rating: videogame.rating,
-      platforms: videogame.platforms
-    })
-  } catch (error) {
-    next(error)
+  if (idVideogame) {
+    let videogames = await getAllVideogames()
+    let videogame = await videogames.filter(v => v.id == idVideogame)
+    if (!videogame.length) return res.status(404).send('Juego no encontrado')
+    res.json(videogame)
   }
 }
 

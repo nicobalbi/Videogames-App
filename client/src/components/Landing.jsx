@@ -1,6 +1,14 @@
+import React from "react"
+import {Link} from 'react-router-dom'
+ 
 function Landing() {
   return (
-    <div>Nico</div>
+    <div>
+      <h1>Bienvenidos!</h1>
+      <Link to='/home'>
+        <button>Ingresar</button>
+      </Link>
+    </div>
   )
 }
   
