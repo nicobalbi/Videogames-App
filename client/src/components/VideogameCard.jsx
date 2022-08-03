@@ -1,13 +1,13 @@
+import React from "react"
 import { Link } from 'react-router-dom';
 
 function VideogameCard({id, name, image, genres}) {
   
   return (
     <div key={id}>
-      <Link to={`/videogame/${id}`}>
+      <Link to={`/home/${id}`}>
         <h2>{name}</h2>
       </Link>
-      <h3>{id}</h3>
       <img src={image} alt={name} width='200px' height='250px'/>
       <p>
         {

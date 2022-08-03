@@ -1,4 +1,4 @@
-
+import React from "react"
 
 function Paginate({videogamesPerPage, videogamesCount, paginate}) {
   

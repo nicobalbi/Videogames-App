@@ -4,9 +4,23 @@ require('dotenv').config();
 
 const { API_KEY } = process.env;
 
-async function getVideogamesFromApi() {
-  let videogamesApi = (await axios(`https://api.rawg.io/api/games?key=${API_KEY}`)).data.results
-    .map(v => {
+async function getVideogamesFromApi(name) {
+
+  let urlApi = `https://api.rawg.io/api/games?key=${API_KEY}`
+  let urlApiSearch = `${urlApi}&search=${name}`
+
+  let videogamesApi = []
+  if (!name) {
+    for (let i = 1; i <= 5; i++) {
+      let videogamesEndpoint = (await axios(urlApi)).data
+      videogamesApi = [...videogamesApi, ...videogamesEndpoint.results]
+      urlApi = videogamesEndpoint.next
+    }
+  } else {
+    videogamesApi = (await axios(urlApiSearch)).data.results
+  }
+
+  let videogamesApiMapped = videogamesApi.map(v => {
       return {
         id: v.id, 
         background_image: v.background_image, 
@@ -14,7 +28,9 @@ async function getVideogamesFromApi() {
         genres: v.genres.map(g => g)
       }
     })
-  return videogamesApi
+
+  return videogamesApiMapped
+  
 }
 
 async function getVideogamesFromDB() {
@@ -30,17 +46,16 @@ async function getVideogamesFromDB() {
   return videogamesDB
 }
 
-async function getAllVideogames() {
-  let vgApi = await getVideogamesFromApi()
+async function getAllVideogames(name) {
+  let vgApi = await getVideogamesFromApi(name)
   let vgDB = await getVideogamesFromDB()
   return vgApi.concat(vgDB)
 }
 
-// GET VIDEOGAMES /videogames | /videogames?name='...'
 async function getVideogames(req, res, next) {
   const { name } = req.query
   try {
-    let videogames = await getAllVideogames()
+    let videogames = await getAllVideogames(name)
     if (name) videogames = videogames.filter(v => v.name.toLowerCase().includes(name.toLowerCase()))
     if (!videogames.length) return res.send('Ningun juego encontrado')
     res.send(videogames)
@@ -49,7 +64,6 @@ async function getVideogames(req, res, next) {
   } 
 }
 
-// POST VIDEOGAMES /videogames
 async function postVideogame(req, res, next) {
   const { name, description, released, rating, genres, platforms, createdInDb } = req.body
   try {
@@ -61,14 +75,14 @@ async function postVideogame(req, res, next) {
       }
     })
     videogameCreated.addGenre(genreDb)
-    res.send('Videogame generado con exito')
+    res.send(`Videogame ${name} generado con exito`)
   } catch (error) {
     next(error)
   }
 }
 
 module.exports = {
-  getAllVideogames,
+  getVideogamesFromDB,
   getVideogames,
   postVideogame
 }
