@@ -17,9 +17,13 @@ async function getVideogameByID(req, res, next) {
         videogame = [
           {
             id: videogameApi.id, 
+            name: videogameApi.name,
             background_image: videogameApi.background_image, 
-            name: videogameApi.name, 
-            genres: videogameApi.genres.map(g => g)
+            description: videogameApi.description,
+            released: videogameApi.released,
+            rating: videogameApi.rating,
+            genres: videogameApi.genres.map(g => g),
+            platforms: videogameApi.platforms.map(p => p.platform.name).join()
           }
         ]
       }

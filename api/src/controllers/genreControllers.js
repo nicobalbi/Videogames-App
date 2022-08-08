@@ -7,7 +7,9 @@ const { API_KEY } = process.env;
 // GET GENRES
 async function getAllGenres() {
   try {
-    let genres = (await axios(`https://api.rawg.io/api/genres?key=${API_KEY}`)).data.results.map(g => ({id: g.id, name: g.name}))
+    let genres = (await axios(`https://api.rawg.io/api/genres?key=${API_KEY}`)).data.results
+    .map(g => ({id: g.id, name: g.name}))
+    .sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0)
     await Genre.bulkCreate(genres)
     console.log('Generos cargados en DB correctamente')
   } catch (error) {

@@ -1,28 +1,34 @@
 import React from "react"
-import {useDispatch} from 'react-redux'
-import {getVideogamesByName} from '../redux/actions'
+import {useDispatch, useSelector} from 'react-redux'
+import {getVideogamesSearched, setSearchValue, setPageNumber, setVideogamesSearched, setLastSearch} from '../redux/actions'
 
 
-function SearchBar({name, named, paginate}) {
+function SearchBar() {
 
+  const searchValue = useSelector(state => state.searchValue)
+  
   const dispatch = useDispatch()
   
   const handleInputChange = e => {
     e.preventDefault()
-    named(e.target.value)
-    console.log(name)
+    dispatch(setSearchValue(e.target.value))
   }
 
   const handleSubmit = e => {
     e.preventDefault()
-    dispatch(getVideogamesByName(name))
-    paginate(1)
+    dispatch(setVideogamesSearched([]))
+    dispatch(getVideogamesSearched(searchValue))
+    dispatch(setPageNumber(1))
+    dispatch(setLastSearch(searchValue))
+    dispatch(setSearchValue(''))
   }
 
   return (
     <div>
-      <input type='text' placeholder='Buscar...' value={name} onChange={e => handleInputChange(e)} />
-      <button type='submit' onClick={e => handleSubmit(e)}>Buscar</button>
+      <form onSubmit={handleSubmit}>
+        <input type='text' placeholder='Buscar...' value={searchValue} onChange={handleInputChange} />
+        <button type='submit'>Buscar</button>
+      </form>
     </div>
   )
 }

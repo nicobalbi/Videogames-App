@@ -17,15 +17,18 @@ async function getVideogamesFromApi(name) {
       urlApi = videogamesEndpoint.next
     }
   } else {
-    videogamesApi = (await axios(urlApiSearch)).data.results
+    videogamesApi = (await axios(urlApiSearch)).data.results.slice(0,15)
   }
 
   let videogamesApiMapped = videogamesApi.map(v => {
       return {
         id: v.id, 
+        name: v.name,
         background_image: v.background_image, 
-        name: v.name, 
-        genres: v.genres.map(g => g)
+        released: v.released,
+        rating: v.rating,
+        genres: v.genres.map(g => g),
+        platforms: v.platforms.map(p => p.platform.name).join()
       }
     })
 
@@ -35,13 +38,13 @@ async function getVideogamesFromApi(name) {
 
 async function getVideogamesFromDB() {
   let videogamesDB = await Videogame.findAll({
-    include: {
+    include: [{
       model: Genre,
       attributes: ['name'],
       through: {
         attributes: []
       }
-    }
+    }]
   })
   return videogamesDB
 }
@@ -67,12 +70,13 @@ async function getVideogames(req, res, next) {
 async function postVideogame(req, res, next) {
   const { name, description, released, rating, genres, platforms, createdInDb } = req.body
   try {
-    let videogame = { name, description, released, rating, platforms, createdInDb }
+    const nameDB = name[0].toUpperCase() + name.substring(1)
+    let videogame = { name: nameDB, description, released, rating, platforms, createdInDb }
     let videogameCreated = await Videogame.create(videogame)
     let genreDb = await Genre.findAll({
       where: {
         name: genres
-      }
+      } 
     })
     videogameCreated.addGenre(genreDb)
     res.send(`Videogame ${name} generado con exito`)

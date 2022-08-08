@@ -1,58 +1,42 @@
 import axios from 'axios'
 
-export const GET_VIDEOGAMES = 'GET_VIDEOGAMES'
-export const GET_VIDEOGAMES_STATE = 'GET_VIDEOGAMES_STATE'
-export const FILTER_VIDEOGAMES = 'FILTER_VIDEOGAMES'
-export const SORT_VIDEOGAMES = 'SORT_VIDEOGAMES'
-export const GET_VIDEOGAMES_NAME = 'GET_VIDEOGAMES_NAME'
-export const GET_GENRES = 'GET_GENRES'
-export const CREATE_VIDEOGAME = 'CREATE_VIDEOGAME'
+export const GET_VIDEOGAMES_ALL = 'GET_VIDEOGAMES_ALL'
+export const GET_VIDEOGAMES_SEARCHED = 'GET_VIDEOGAMES_SEARCHED'
 export const GET_VIDEOGAME_DETAIL = 'GET_VIDEOGAME_DETAIL'
+export const GET_GENRES = 'GET_GENRES'
+export const MODIFY_SORTS = 'MODIFY_SORTS'
+export const MODIFY_SORTS_VALUES = 'MODIFY_SORTS_VALUES'
+export const MODIFY_FILTERS = 'MODIFY_FILTERS'
+export const MODIFY_FILTERS_VALUES = 'MODIFY_FILTERS_VALUES'
+export const SET_VIDEOGAMES_RENDERED = 'SET_VIDEOGAMES_RENDERED'
+export const SET_SEARCH_VALUE = 'SET_SEARCH_VALUE'
+export const SET_PAGE_NUMBER = 'SET_PAGE_NUMBER'
+export const SET_VIDEOGAMES_SEARCHED = 'SET_VIDEOGAMES_SEARCHED'
+export const SET_LAST_SEARCH = 'SET_LAST_SEARCH'
 
-export function getAllVideogames() {
+export function getVideogamesAll() {
   return (dispatch) => {
     return axios('http://localhost:3001/videogames')
-    .then(res => dispatch({type: GET_VIDEOGAMES, payload: res.data}))
+    .then(res => dispatch({type: GET_VIDEOGAMES_ALL, payload: res.data}))
     .catch(error => console.log(error))
   }
 }
 
-export function createVideogame(values) {
-  return {
-    type: CREATE_VIDEOGAME,
-    payload: values
-  }
-}
-
-export function filterVideogames(filters) {
-  return {
-    type: FILTER_VIDEOGAMES,
-    payload: filters
-  }
-}
-
-export function sortVideogames(sort) {
-  return {
-    type: SORT_VIDEOGAMES,
-    payload: sort
-  }
-}
-
-export function getVideogamesByName(name) {
+export function getVideogamesSearched(name) {
   return async (dispatch) => {
     try {   
       let videogames = await axios(`http://localhost:3001/videogames?name=${name}`)
-      return dispatch({type: GET_VIDEOGAMES_NAME, payload: videogames.data})
+      return dispatch({type: GET_VIDEOGAMES_SEARCHED, payload: videogames.data})
     } catch (error) {
       console.log(error)
     }
   }
 } 
 
-export function getGenres() {
+export function getVideogameDetail(id) {
   return (dispatch) => {
-    return axios('http://localhost:3001/genres')
-    .then(res => dispatch({type: GET_GENRES, payload: res.data}))
+    return axios(`http://localhost:3001/videogame/${id}`)
+    .then(res => dispatch({type: GET_VIDEOGAME_DETAIL, payload: res.data}))
     .catch(error => console.log(error))
   }
 }
@@ -65,10 +49,76 @@ export function postVideogame(values) {
   }
 }
 
-export function getVideogameDetail(id) {
+export function getGenres() {
   return (dispatch) => {
-    return axios(`http://localhost:3001/videogame/${id}`)
-    .then(res => dispatch({type: GET_VIDEOGAME_DETAIL, payload: res.data}))
+    return axios('http://localhost:3001/genres')
+    .then(res => dispatch({type: GET_GENRES, payload: res.data}))
     .catch(error => console.log(error))
   }
 }
+
+export function modifySorts(payload) {
+  return {
+    type: MODIFY_SORTS,
+    payload: payload
+  }
+}
+
+export function modifySortsValues(payload) {
+  return {
+    type: MODIFY_SORTS_VALUES,
+    payload: payload
+  }
+}
+
+export function modifyFilters(payload) {
+  return {
+    type: MODIFY_FILTERS,
+    payload: payload
+  }
+}
+
+export function modifyFiltersValues(payload) {
+  return {
+    type: MODIFY_FILTERS_VALUES,
+    payload: payload
+  }
+}
+
+export function setVideogamesRendered(payload) {
+  return {
+    type: SET_VIDEOGAMES_RENDERED,
+    payload: payload
+  }
+}
+
+export function setSearchValue(payload) {
+  return {
+    type: SET_SEARCH_VALUE,
+    payload: payload
+  }
+}
+
+export function setPageNumber(payload) {
+  return {
+    type: SET_PAGE_NUMBER,
+    payload: payload
+  }
+}
+
+export function setVideogamesSearched(payload) {
+  return {
+    type: SET_VIDEOGAMES_SEARCHED,
+    payload: payload
+  }
+}
+
+export function setLastSearch(payload) {
+  return {
+    type: SET_LAST_SEARCH,
+    payload: payload
+  }
+}
+
+
+

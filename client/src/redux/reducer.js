@@ -1,62 +1,56 @@
 import { 
-  GET_VIDEOGAMES,
-  GET_VIDEOGAMES_STATE,
-  FILTER_VIDEOGAMES,
-  SORT_VIDEOGAMES,
-  GET_VIDEOGAMES_NAME,
+  GET_VIDEOGAMES_ALL,
+  GET_VIDEOGAMES_SEARCHED,
+  GET_VIDEOGAME_DETAIL,
   GET_GENRES,
-  CREATE_VIDEOGAME,
-  GET_VIDEOGAME_DETAIL
+  MODIFY_SORTS,
+  MODIFY_SORTS_VALUES,
+  MODIFY_FILTERS,
+  MODIFY_FILTERS_VALUES,
+  SET_VIDEOGAMES_RENDERED,
+  SET_SEARCH_VALUE,
+  SET_PAGE_NUMBER,
+  SET_VIDEOGAMES_SEARCHED,
+  SET_LAST_SEARCH,
 } from "./actions";
 
 const initialState = {
-  videogames: [],
   videogamesAll: [],
+  videogamesSearched: [],
   videogameDetail: [],
   genres: [],
+  sorts: [],
+  sortsValues: {name: 'none', rating: 'none'},
+  filters: [],
+  filtersValues: {genre: 'none', origin: 'none'},
+  videogamesRendered: [],
+  searchValue: '',
+  pageNumber: 1,
+  videogamesPerPage: 15,
+  lastSearch: ''
 }
 
 function reducer(state = initialState, {type, payload}) {
 
   switch (type) {
 
-    case GET_VIDEOGAMES:
+    case GET_VIDEOGAMES_ALL:
       return {
         ...state,
-        videogames: payload,
-        videogamesAll: payload
+        videogamesAll: payload,
+        videogamesRendered: payload
       }
 
-    case GET_VIDEOGAMES_STATE:
+    case GET_VIDEOGAMES_SEARCHED:
       return {
         ...state,
-        videogames: state.videogamesAll,
+        videogamesSearched: payload,
       }
 
-    case FILTER_VIDEOGAMES:
-      let videogamesFiltered = state.videogamesAll
-      if (payload.genre !== 'All') videogamesFiltered = videogamesFiltered.filter(v => v.genres.filter(g => g.name === payload.genre).length > 0)
-      if (payload.created === 'Creados') videogamesFiltered = videogamesFiltered.filter(v => v.hasOwnProperty('createdInDb'))
-      if (payload.created === 'Api') videogamesFiltered = videogamesFiltered.filter(v => !v.hasOwnProperty('createdInDb'))
+    case GET_VIDEOGAME_DETAIL:
       return {
         ...state,
-        videogames: videogamesFiltered
-      }
-      
-    case SORT_VIDEOGAMES:
-      const videogamesSorted = (
-        payload === 'Ascendente' ? state.videogames.sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0) :
-        state.videogames.sort((a, b) => a.name > b.name ? -1 : a.name < b.name ? 1 : 0)
-      )
-      return {
-        ...state,
-        videogames: videogamesSorted
-      }
-
-    case GET_VIDEOGAMES_NAME:
-      return {
-        ...state,
-        videogames: payload,
+        videogameDetail: payload
       }
 
     case GET_GENRES:
@@ -65,15 +59,58 @@ function reducer(state = initialState, {type, payload}) {
         genres: payload,
       }
 
-    case CREATE_VIDEOGAME:
-      return {
-        ...state
-      }
-
-    case GET_VIDEOGAME_DETAIL:
+    case MODIFY_SORTS:
       return {
         ...state,
-        videogameDetail: payload
+        sorts: payload
+      }
+
+    case MODIFY_SORTS_VALUES:
+      return {
+        ...state,
+        sortsValues: payload
+      }
+
+    case MODIFY_FILTERS:
+      return {
+        ...state,
+        filters: payload
+      }
+
+    case MODIFY_FILTERS_VALUES:
+      return {
+        ...state,
+        filtersValues: payload
+      }
+
+    case SET_VIDEOGAMES_RENDERED:
+      return {
+        ...state,
+        videogamesRendered: payload
+      }
+
+    case SET_SEARCH_VALUE:
+      return {
+        ...state,
+        searchValue: payload
+      }
+
+    case SET_PAGE_NUMBER:
+      return {
+        ...state,
+        pageNumber: payload
+      }
+
+    case SET_VIDEOGAMES_SEARCHED:
+      return {
+        ...state,
+        videogamesSearched: payload
+      }
+
+    case SET_LAST_SEARCH:
+      return {
+        ...state,
+        lastSearch: payload
       }
 
     default: return state
