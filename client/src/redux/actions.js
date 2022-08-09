@@ -13,6 +13,8 @@ export const SET_SEARCH_VALUE = 'SET_SEARCH_VALUE'
 export const SET_PAGE_NUMBER = 'SET_PAGE_NUMBER'
 export const SET_VIDEOGAMES_SEARCHED = 'SET_VIDEOGAMES_SEARCHED'
 export const SET_LAST_SEARCH = 'SET_LAST_SEARCH'
+export const SET_VIDEOGAMES_ALL = 'SET_VIDEOGAMES_ALL'
+export const SET_VIDEOGAME_DETAIL = 'SET_VIDEOGAME_DETAIL'
 
 export function getVideogamesAll() {
   return (dispatch) => {
@@ -116,6 +118,20 @@ export function setVideogamesSearched(payload) {
 export function setLastSearch(payload) {
   return {
     type: SET_LAST_SEARCH,
+    payload: payload
+  }
+}
+
+export function setVideogamesAll(payload) {
+  return {
+    type: SET_VIDEOGAMES_ALL,
+    payload: payload
+  }
+}
+
+export function setVideogameDetail(payload) {
+  return {
+    type: SET_VIDEOGAME_DETAIL,
     payload: payload
   }
 }

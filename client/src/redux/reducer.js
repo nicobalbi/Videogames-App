@@ -12,6 +12,8 @@ import {
   SET_PAGE_NUMBER,
   SET_VIDEOGAMES_SEARCHED,
   SET_LAST_SEARCH,
+  SET_VIDEOGAMES_ALL,
+  SET_VIDEOGAME_DETAIL
 } from "./actions";
 
 const initialState = {
@@ -27,7 +29,7 @@ const initialState = {
   searchValue: '',
   pageNumber: 1,
   videogamesPerPage: 15,
-  lastSearch: ''
+  lastSearch: '',
 }
 
 function reducer(state = initialState, {type, payload}) {
@@ -111,6 +113,18 @@ function reducer(state = initialState, {type, payload}) {
       return {
         ...state,
         lastSearch: payload
+      }
+    
+    case SET_VIDEOGAMES_ALL:
+      return {
+        ...state,
+        videogamesAll: payload
+      }
+
+    case SET_VIDEOGAME_DETAIL:
+      return {
+        ...state,
+        videogameDetail: payload
       }
 
     default: return state

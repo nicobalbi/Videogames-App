@@ -24,7 +24,7 @@ async function getVideogamesFromApi(name) {
       return {
         id: v.id, 
         name: v.name,
-        background_image: v.background_image, 
+        image: v.background_image, 
         released: v.released,
         rating: v.rating,
         genres: v.genres.map(g => g),
@@ -46,13 +46,13 @@ async function getVideogamesFromDB() {
       }
     }]
   })
-  return videogamesDB
+  return videogamesDB.reverse()
 }
 
 async function getAllVideogames(name) {
   let vgApi = await getVideogamesFromApi(name)
   let vgDB = await getVideogamesFromDB()
-  return vgApi.concat(vgDB)
+  return vgDB.concat(vgApi)
 }
 
 async function getVideogames(req, res, next) {
@@ -60,7 +60,7 @@ async function getVideogames(req, res, next) {
   try {
     let videogames = await getAllVideogames(name)
     if (name) videogames = videogames.filter(v => v.name.toLowerCase().includes(name.toLowerCase()))
-    if (!videogames.length) return res.send('Ningun juego encontrado')
+    if (!videogames.length) return res.send('Videogame not found')
     res.send(videogames)
   } catch (error) {
     next(error)
@@ -68,10 +68,12 @@ async function getVideogames(req, res, next) {
 }
 
 async function postVideogame(req, res, next) {
-  const { name, description, released, rating, genres, platforms, createdInDb } = req.body
+  const { name, description, image, released, rating, genres, platforms, createdInDb } = req.body
   try {
     const nameDB = name[0].toUpperCase() + name.substring(1)
-    let videogame = { name: nameDB, description, released, rating, platforms, createdInDb }
+    const descriptionDB = '<p>'.concat(description).concat('</p>')
+    const ratingDB = rating === '' ? 0 : rating
+    let videogame = { name: nameDB, description: descriptionDB, image, released, rating: ratingDB, platforms, createdInDb }
     let videogameCreated = await Videogame.create(videogame)
     let genreDb = await Genre.findAll({
       where: {

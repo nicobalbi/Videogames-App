@@ -1,10 +1,10 @@
 import './App.css';
 import {Route, Switch} from 'react-router-dom'
-// import NavBar from './components/NavBar'
 import Landing from './components/Landing'
 import Home from './components/Home'
 import VideogameDetail from './components/VideogameDetail'
 import CreateVideogame from './components/CreateVideogame'
+import DeadLink from './components/DeadLink'
 
 function App() {
   return (
@@ -12,8 +12,9 @@ function App() {
       <Switch>
         <Route exact path='/' component={Landing} />
         <Route exact path='/home' component={Home} />
-        <Route path='/videogame' component={CreateVideogame} />
+        <Route path='/create' component={CreateVideogame} />
         <Route path='/home/:id' component={VideogameDetail} />
+        <Route component={DeadLink} />
       </Switch>
     </div>
   );

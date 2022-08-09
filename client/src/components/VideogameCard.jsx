@@ -1,5 +1,6 @@
 import React from "react"
 import { Link } from 'react-router-dom';
+import imgDefault from '../images/mushroom.jpg'
 
 function VideogameCard({id, name, image, rating, genres, platforms}) {
   
@@ -8,7 +9,7 @@ function VideogameCard({id, name, image, rating, genres, platforms}) {
       <Link to={`/home/${id}`}>
         <h2>{name}</h2>
       </Link>
-      <img src={image} alt={name} width='300px' height='250px'/>
+      {image ? <img src={image} alt={name} width='300px' height='250px'/> : <img src={imgDefault} alt={name} width='300px' height='250px'/>}
       <div>{rating}</div>
       <div>
         {

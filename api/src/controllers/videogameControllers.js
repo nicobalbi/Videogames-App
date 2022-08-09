@@ -13,12 +13,11 @@ async function getVideogameByID(req, res, next) {
       if (!videogame.length) {
         let urlApiID = `https://api.rawg.io/api/games/${idVideogame}?key=${API_KEY}` 
         let videogameApi = (await axios(urlApiID)).data
-        if (!videogameApi) return res.status(404).send('Juego no encontrado')
         videogame = [
           {
             id: videogameApi.id, 
             name: videogameApi.name,
-            background_image: videogameApi.background_image, 
+            image: videogameApi.background_image, 
             description: videogameApi.description,
             released: videogameApi.released,
             rating: videogameApi.rating,
@@ -29,7 +28,7 @@ async function getVideogameByID(req, res, next) {
       }
       res.json(videogame)
     } catch (error) {
-      next(error)
+      res.send('Videogame not found')
     }
   }
 }

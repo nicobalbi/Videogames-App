@@ -3,10 +3,11 @@ import {useDispatch, useSelector} from 'react-redux'
 import {getVideogamesAll, getGenres, modifySorts, modifySortsValues, modifyFilters, modifyFiltersValues, setVideogamesRendered, setPageNumber, setVideogamesSearched, setLastSearch} from '../redux/actions'
 import {Link} from 'react-router-dom'
 import VideogameCard from './VideogameCard'
-// import vgImage from '../images/videogames.jpg'
 import Paginate from './Paginate'
 import SearchBar from './SearchBar'
 import '../styles/Home.css'
+import gifLoading from '../images/pacman.gif'
+import imgNotFound from '../images/pacmanSad.png'
 
 function Home() {
   
@@ -26,14 +27,11 @@ function Home() {
   const positionOfLastVideogame = pageNumber * videogamesPerPage
   const indexOfFirstVideogame = positionOfLastVideogame - videogamesPerPage
   const currentVideogames = videogamesRendered.slice(indexOfFirstVideogame, positionOfLastVideogame)
-
-  console.log('hola')
   
   useEffect(() => loadHomeData(), [dispatch])     // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => applySortsFilters(), [sorts, filters, videogamesSearched])     // eslint-disable-line react-hooks/exhaustive-deps
   
   const loadHomeData = () => {
-    console.log('loadData')
     if (videogamesAll.length === 0) dispatch(getVideogamesAll())
     if (genres.length === 0) dispatch(getGenres())
   }
@@ -57,18 +55,23 @@ function Home() {
   }
 
   const applySortsFilters = () => {
-    console.log('apply sorts filters')
+
+    if (typeof videogamesSearched === 'string') return dispatch(setVideogamesRendered([]))
+
     let newVideogamesRendered = [...videogamesAll]
-    if (videogamesSearched.length > 0) newVideogamesRendered = [...videogamesSearched]
-    sorts.forEach(sort => {
+    if (videogamesSearched.length > 0) newVideogamesRendered = [...videogamesSearched];
+
+    [...sorts].reverse().forEach(sort => {
       if (sortsValues[sort] === 'Ascending') newVideogamesRendered.sort((a, b) => a[sort] < b[sort] ? -1 : a[sort] > b[sort] ? 1 : 0)
       if (sortsValues[sort] === 'Descending') newVideogamesRendered.sort((a, b) => a[sort] > b[sort] ? -1 : a[sort] < b[sort] ? 1 : 0)
     })
+
     filters.forEach(filter => {
       if (filter === 'genre') newVideogamesRendered = newVideogamesRendered.filter(v => v.genres.filter(g => g.name === filtersValues.genre).length > 0)
       if (filter === 'origin' && filtersValues.origin === 'Created') newVideogamesRendered = newVideogamesRendered.filter(v => v.hasOwnProperty('createdInDb'))
       if (filter === 'origin' && filtersValues.origin === 'Api') newVideogamesRendered = newVideogamesRendered.filter(v => !v.hasOwnProperty('createdInDb'))
     })
+
     dispatch(setVideogamesRendered(newVideogamesRendered))
   }
 
@@ -125,11 +128,15 @@ function Home() {
   return (
     <div className="backHome">
 
-      {videogamesAll.length > 0 ?
-
         <div>
-
-          <Link to='/videogame'>Create Videogame</Link>
+          
+          <div>
+            <Link to='/'>Back to Landing</Link>
+          </div>
+          
+          <div>        
+            <Link to='/create'>Create Videogame</Link>
+          </div>
 
           <h1>Videogames App</h1>
 
@@ -150,14 +157,18 @@ function Home() {
               <option value='Descending'>Descending</option>
             </select>
 
+          </div>
+
+          <div>
+
             <select onChange={handleFilterGenre} id='filterGenre'>
               <option value='none'>Filter by genre</option>
               {
                 genres.map(g => {
                   return (
                     <option value={g.name} key={g.name}>{g.name}</option>
-                  )
-                })
+                    )
+                  })
               }
             </select>
 
@@ -166,57 +177,72 @@ function Home() {
               <option value='Created'>Created</option>
               <option value='Api'>Api</option>
             </select> 
-
-            <Paginate />
-
-            <SearchBar />
             
-            {
-              sorts.length > 0 && [...sorts].reverse().map((s, i) => {
-                return (
-                  <div key={s}>
-                    <span>{sorts.length === 1 ? `Sort by ${s}: ${sortsValues[s]}` : `Sort ${i + 1} by ${s}: ${sortsValues[s]}`}</span>
-                    <button onClick={() => deleteSort(s)}>X</button>
-                  </div>
-                  )
-                })
-            }
-            {
-              filters.length > 0 && filters.map((f, i) => {
+          </div>
+
+          <SearchBar />
+
+          {
+            sorts.length > 0 && sorts.map((s, i) => {
               return (
-                <div key={f}>
-                  <span>{filters.length === 1 ? `Filter by ${f}: ${filtersValues[f]}` : `Filter ${i + 1} by ${f}: ${filtersValues[f]}`}</span>
-                  <button onClick={() => deleteFilter(f)}>X</button>
-                </div>
-                )
-              })
-            }
-            {
-              lastSearch && 
-              <div>
-                <span>{`Search by name: ${lastSearch}`}</span>
-                <button onClick={deleteLastSearch}>X</button>
+                <div key={s}>
+                <span>{sorts.length === 1 ? `Sort by ${s}: ${sortsValues[s]}` : `Sort ${i + 1} by ${s}: ${sortsValues[s]}`}</span>
+                <button onClick={() => deleteSort(s)}>X</button>
               </div>
-            }
+              )
+            })
+          }
+          {
+            filters.length > 0 && filters.map((f, i) => {
+            return (
+              <div key={f}>
+                <span>{filters.length === 1 ? `Filter by ${f}: ${filtersValues[f]}` : `Filter ${i + 1} by ${f}: ${filtersValues[f]}`}</span>
+                <button onClick={() => deleteFilter(f)}>X</button>
+              </div>
+              )
+            })
+          }
+          {
+            lastSearch && 
+            <div>
+              <span>{`Search by name: ${lastSearch}`}</span>
+              <button onClick={deleteLastSearch}>X</button>
+            </div>
+          }
 
-          </div>
+        </div>
+
+        {videogamesAll.length === 0 || (lastSearch && videogamesSearched.length === 0) ?
+      
+          <div>
+            <span>Loading</span>
+            <img src={gifLoading} alt='Loading'/> 
+          </div> :
           
-          <div className='cards'>
+          <div>
 
-            {
-              currentVideogames?.map(e => {
-                return (
-                  <VideogameCard id={e.id} name={e.name} image={e.background_image} rating={e.rating} genres={e.genres} platforms={e.platforms} key={e.id}/>
-                  )
-                })
-            }
+            {videogamesRendered.length > 0 && <Paginate />}
+
+            <div className='cards'>
+
+              {
+                currentVideogames.length > 0 ? currentVideogames.map(e => {
+                  return (
+                    <VideogameCard id={e.id} name={e.name} image={e.image} rating={e.rating} genres={e.genres} platforms={e.platforms} key={e.id}/>
+                    )
+                  }) :
+                  <div>
+                    <h2>Oh no! No videogames were found</h2>
+                    <img src={imgNotFound} alt='Not found'/> 
+                  </div>
+              }
+
+            </div>
 
           </div>
 
-        </div> :
+        }
 
-      <div>Loading...</div>
-    }
     </div>
   )
 }
