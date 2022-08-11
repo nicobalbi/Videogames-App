@@ -1,0 +1,64 @@
+.card {
+  border: 1px solid white;
+  border-radius: 20px;
+  margin: 10px;
+  height: fit-content;
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.cardNameContainer {
+  margin: 5px;
+  line-height: 60px;
+  height: 60px;
+  text-align: center;
+  overflow-wrap: break-word;
+}
+
+.cardName {
+  color: white;
+  font-size: 24px;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
+}
+
+.cardImage {
+  background-color: rgba(0, 0, 0, 0.242);
+  padding: 15px;
+  border-radius: 20px;
+}
+
+.cardImageContainer {
+  border-radius: 20px;
+}
+
+.rating {
+  padding: auto;
+  margin: 5px auto auto auto;
+  color: white;
+  width: fit-content;
+  font-size: 20px;
+}
+
+.genreContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+}
+
+.genre {
+  border-radius: 10px;
+  border: 1px solid white;
+  padding: 5px;
+  margin: 5px;
+  color: white;
+}

@@ -2,7 +2,7 @@ import React, {useState, useEffect, useRef} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {Link, useHistory} from 'react-router-dom'
 import {postVideogame, getGenres, setVideogamesAll} from '../redux/actions'
-
+import '../styles/CreateVideogame.css'
 
 function CreateVideogame() {
   
@@ -103,112 +103,136 @@ function CreateVideogame() {
   }
 
   return (
-    <div>
 
-      <Link to='/home'><button>Back to home</button></Link>
-
-      <h1>Create your videogame!</h1>
-
-      <form onSubmit={handleSubmit}>
-
-        <div>
-          <label>Name: </label>
-          <input type='text' value={input.name} name='name' onChange={handleInputChange} />
-          {errors.name && <p className='error'>{errors.name}</p>}
-        </div>
-
-        <div>
-          <label>Description: </label>
-          <textarea type='text' value={input.description} name='description' onChange={handleInputChange} />
-          {errors.description && <p className='error'>{errors.description}</p>}
-        </div>
-
-        <div>
-          <label>Image URL: </label>
-          <input type='text' value={input.image} name='image' onChange={handleInputChange} />
-        </div>
-
-        <div>
-          <label>Released date: </label>
-          <input type='text' value={input.released} name='released' onChange={handleInputChange} />
-          {errors.released && <p className='error'>{errors.released}</p>}
-        </div>
-
-        <div>
-          <label>Rating: </label>
-          <input type='text' value={input.rating} name='rating' onChange={handleInputChange} />
-          {errors.rating && <p className='error'>{errors.rating}</p>}
-        </div>
-
-        <select onChange={handleSelectGenre}>
-          <option value='none'>Select genres</option>
-          {
-            genres.map(g => {
-              return (
-                <option value={g.name} key={g.name}>{g.name}</option>
-                )
-              })
-            }
-        </select>
-        {errors.genres && <p className='error'>{errors.genres}</p>}
-
-        <select onChange={handleSelectPlatform}>
-          <option value='none'>Select platforms</option>
-          <option value='Android'>Android</option>
-          <option value='Game Boy'>Game Boy</option>
-          <option value='GameCube'>GameCube</option>
-          <option value='iOS'>iOS</option>
-          <option value='macOS'>macOS</option>
-          <option value='Nintendo 64'>Nintendo 64</option>
-          <option value='Nintendo DS'>Nintendo DS</option>
-          <option value='Nintendo Switch'>Nintendo Switch</option>
-          <option value='PC'>PC</option>
-          <option value='PlayStation'>PlayStation</option>
-          <option value='PlayStation 2'>PlayStation 2</option>
-          <option value='PlayStation 3'>PlayStation 3</option>
-          <option value='PlayStation 4'>PlayStation 4</option>
-          <option value='PlayStation 5'>PlayStation 5</option>
-          <option value='PSP'>PSP</option>
-          <option value='SEGA Saturn'>SEGA Saturn</option>
-          <option value='Wii'>Wii</option>
-          <option value='Xbox 360'>Xbox 360</option>
-          <option value='Xbox One'>Xbox One</option>
-        </select>
-        {errors.platforms && <p className='error'>{errors.platforms}</p>}
-
-        <br/>
-
-        <div>
-          <button type='submit'>Create Videogame</button>
-        </div>
-
-      </form>
+    <div className='createContainer'>
       
-      <div>
-        <h4>Selected genres</h4>
-        {input.genres.map(g => {
-          return (
-            <div className='divGenre' key={g}>
-              <p>{g}</p>
-              <button className='botonX' onClick={() => handleDeleteGenre(g)}>X</button> 
-            </div>
-          )
-        })}
-      </div>
+      <Link to='/home'>
+        <div className='btnHome'>Back to home</div>
+      </Link>
 
-      <div>
-        <h4>Selected platforms</h4>
-        {input.platforms && input.platforms.split(',').map(p => {
-          return (
-            <div className='divPlatform' key={p}>
-              <p>{p}</p>
-              <button className='botonX' onClick={() => handleDeletePlatform(p)}>X</button> 
+      <h1 className='titleCreate'>Create your videogame!</h1>
+
+      <div className='formContainer' onSubmit={handleSubmit}>
+
+        <form className='form'>
+
+          <div className='formData'>
+
+            <div className='columns'>
+
+              <div className='dato'>
+                <label>Name: </label>
+                <input type='text' value={input.name} name='name' onChange={handleInputChange} />
+                {errors.name && <p className='error'>{errors.name}</p>}
+              </div>
+
+              <div className='dato'>
+                <label>Description: </label>
+                <textarea type='text' value={input.description} name='description' onChange={handleInputChange} />
+                {errors.description && <p className='error'>{errors.description}</p>}
+              </div>
+
             </div>
-          )
-        })}
+
+            <div className='columns'>
+
+              <div className='dato'>
+                <label>Image URL: </label>
+                <input type='text' value={input.image} name='image' onChange={handleInputChange} />
+              </div>
+
+              <div className='dato'>
+                <label>Released date: </label>
+                <input type='text' value={input.released} name='released' onChange={handleInputChange} />
+                {errors.released && <p className='error'>{errors.released}</p>}
+              </div>
+
+              <div className='dato'>
+                <label>Rating: </label>
+                <input type='text' value={input.rating} name='rating' onChange={handleInputChange} />
+                {errors.rating && <p className='error'>{errors.rating}</p>}
+              </div>
+
+            </div>
+
+            <div className='columns'>
+
+              <div className='datoSelect'>
+                <select onChange={handleSelectGenre}>
+                  <option value='none'>Select genres</option>
+                  {
+                    genres.map(g => {
+                      return (
+                        <option value={g.name} key={g.name}>{g.name}</option>
+                        )
+                      })
+                    }
+                </select>
+                {errors.genres && <p className='error'>{errors.genres}</p>}
+                <div>
+                  <h4>Selected genres</h4>
+                  {input.genres.map(g => {
+                    return (
+                      <div className='divGenre' key={g}>
+                        <p>{g}</p>
+                        <button className='botonX' onClick={() => handleDeleteGenre(g)}>X</button> 
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
+
+              <div className='datoSelect'>
+                <select onChange={handleSelectPlatform}>
+                  <option value='none'>Select platforms</option>
+                  <option value='Android'>Android</option>
+                  <option value='Game Boy'>Game Boy</option>
+                  <option value='GameCube'>GameCube</option>
+                  <option value='iOS'>iOS</option>
+                  <option value='macOS'>macOS</option>
+                  <option value='Nintendo 64'>Nintendo 64</option>
+                  <option value='Nintendo DS'>Nintendo DS</option>
+                  <option value='Nintendo Switch'>Nintendo Switch</option>
+                  <option value='PC'>PC</option>
+                  <option value='PlayStation'>PlayStation</option>
+                  <option value='PlayStation 2'>PlayStation 2</option>
+                  <option value='PlayStation 3'>PlayStation 3</option>
+                  <option value='PlayStation 4'>PlayStation 4</option>
+                  <option value='PlayStation 5'>PlayStation 5</option>
+                  <option value='PSP'>PSP</option>
+                  <option value='SEGA Saturn'>SEGA Saturn</option>
+                  <option value='Wii'>Wii</option>
+                  <option value='Xbox 360'>Xbox 360</option>
+                  <option value='Xbox One'>Xbox One</option>
+                </select>
+                {errors.platforms && <p className='error'>{errors.platforms}</p>}
+                <div>
+                  <h4>Selected platforms</h4>
+                  {input.platforms && input.platforms.split(',').map(p => {
+                    return (
+                      <div className='divPlatform' key={p}>
+                        <p>{p}</p>
+                        <button className='botonX' onClick={() => handleDeletePlatform(p)}>X</button> 
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
+
+            </div>
+          
+          </div>
+
+          <div className='btnCreateContainer'>
+            <button className='btnCreateVg' type='submit'>Create Videogame</button>
+          </div>
+
+        </form>
+
       </div>
 
     </div>
+
   )
 }
   

@@ -7,6 +7,7 @@ function Paginate() {
   
   const videogamesRendered = useSelector(state => state.videogamesRendered)
   const videogamesPerPage = useSelector(state => state.videogamesPerPage)
+  const pageNumber = useSelector(state => state.pageNumber)
 
   const dispatch = useDispatch()
 
@@ -25,7 +26,7 @@ function Paginate() {
       <ul className="paginate">
         { pageNumbers?.map(num => {
           return (
-            <li className="num" key={num} onClick={() => handlePaginate(num)}>
+            <li className={num === pageNumber ? "numSelected" : "num"} key={num} onClick={() => handlePaginate(num)}>
               <span>{num}</span>
             </li>
           )

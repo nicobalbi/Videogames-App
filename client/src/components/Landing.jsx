@@ -5,12 +5,10 @@ import '../styles/Landing.css'
 function Landing() {
   return (
     <div className="background">
-      <div>
-        <h1>Welcome!</h1>
-        <Link to='/home'>
-          <button>Enter</button>
-        </Link>
-      </div>
+      <h1 className="title">Welcome to the videogames app!</h1>
+      <Link to='/home'>
+        <button className="button">GAME ON!</button>
+      </Link>
     </div>
   )
 }

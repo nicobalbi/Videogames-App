@@ -126,42 +126,54 @@ function Home() {
   }
 
   return (
-    <div className="backHome">
 
-        <div>
-          
-          <div>
-            <Link to='/'>Back to Landing</Link>
-          </div>
-          
-          <div>        
-            <Link to='/create'>Create Videogame</Link>
-          </div>
+    <div className="mainContainer">
+        
+      <div className='mainButtons'>
+        
+        <div className='topRow'>
 
-          <h1>Videogames App</h1>
-
-          <button onClick={handleReload}>Reload</button>
-          <button onClick={handleReset}>Reset</button>
+          <Link to='/'>
+            <div className='btnLanding'>Back to Landing</div>
+          </Link>
 
           <div>
+            <button className='btnReload' onClick={handleReload}>Reload Videogames</button>
+          </div>
 
-            <select onChange={handleSortName} id='sortName'>
+        </div>
+
+        <h1 className='titleHome'>Videogames App</h1>
+        
+        <Link to='/create'>
+          <div className='btnCreate'>Create Videogame</div>
+        </Link>
+
+        <SearchBar />
+
+        <div className='sortContainer'>
+
+          <div>
+            <select className={sortsValues.name !== "none" ? 'dropdownSel' : 'dropdown'} onChange={handleSortName} id='sortName'>
               <option value='none'>Sort by name</option>
               <option value='Ascending'>Ascending</option>
               <option value='Descending'>Descending</option>
             </select>
-
-            <select onChange={handleSortRating} id='sortRating'>
+          </div>
+          
+          <div>
+            <select className={sortsValues.rating !== "none" ? 'dropdownSel' : 'dropdown'} onChange={handleSortRating} id='sortRating'>
               <option value='none'>Sort by rating</option>
               <option value='Ascending'>Ascending</option>
               <option value='Descending'>Descending</option>
             </select>
-
           </div>
 
-          <div>
+        </div>
 
-            <select onChange={handleFilterGenre} id='filterGenre'>
+        <div className='filterContainer'>
+          <div>
+            <select className={filtersValues.genre !== "none" ? 'dropdownSel' : 'dropdown'} onChange={handleFilterGenre} id='filterGenre'>
               <option value='none'>Filter by genre</option>
               {
                 genres.map(g => {
@@ -171,52 +183,56 @@ function Home() {
                   })
               }
             </select>
-
-            <select onChange={handleFilterOrigin} id='filterOrigin'>
+          </div>
+          <div>
+            <select className={filtersValues.origin !== "none" ? 'dropdownSel' : 'dropdown'} onChange={handleFilterOrigin} id='filterOrigin'>
               <option value='none'>Filter by origin</option>
               <option value='Created'>Created</option>
               <option value='Api'>Api</option>
             </select> 
-            
           </div>
-
-          <SearchBar />
-
-          {
-            sorts.length > 0 && sorts.map((s, i) => {
-              return (
-                <div key={s}>
-                <span>{sorts.length === 1 ? `Sort by ${s}: ${sortsValues[s]}` : `Sort ${i + 1} by ${s}: ${sortsValues[s]}`}</span>
-                <button onClick={() => deleteSort(s)}>X</button>
-              </div>
-              )
-            })
-          }
-          {
-            filters.length > 0 && filters.map((f, i) => {
-            return (
-              <div key={f}>
-                <span>{filters.length === 1 ? `Filter by ${f}: ${filtersValues[f]}` : `Filter ${i + 1} by ${f}: ${filtersValues[f]}`}</span>
-                <button onClick={() => deleteFilter(f)}>X</button>
-              </div>
-              )
-            })
-          }
-          {
-            lastSearch && 
-            <div>
-              <span>{`Search by name: ${lastSearch}`}</span>
-              <button onClick={deleteLastSearch}>X</button>
-            </div>
-          }
-
         </div>
+
+        <div>
+          <button className='btnReset' onClick={handleReset}>Reset filters</button>
+        </div>
+
+        {
+          sorts.length > 0 && sorts.map((s, i) => {
+            return (
+            <div className='selected' key={s}>
+              <span>{sorts.length === 1 ? `Sort by ${s}: ${sortsValues[s]}` : `Sort ${i + 1} by ${s}: ${sortsValues[s]}`}</span>
+              <button className='btnErase' onClick={() => deleteSort(s)}>X</button>
+            </div>
+            )
+          })
+        }
+        {
+          filters.length > 0 && filters.map((f, i) => {
+          return (
+            <div className='selected' key={f}>
+              <span>{filters.length === 1 ? `Filter by ${f}: ${filtersValues[f]}` : `Filter ${i + 1} by ${f}: ${filtersValues[f]}`}</span>
+              <button className='btnErase' onClick={() => deleteFilter(f)}>X</button>
+            </div>
+            )
+          })
+        }
+        {
+          lastSearch && 
+          <div className='selected' >
+            <span>{`Search by name: ${lastSearch}`}</span>
+            <button className='btnErase' onClick={deleteLastSearch}>X</button>
+          </div>
+        }
+
+      </div>
+      
+      <div className='gallery'>
 
         {videogamesAll.length === 0 || (lastSearch && videogamesSearched.length === 0) ?
       
-          <div>
-            <span>Loading</span>
-            <img src={gifLoading} alt='Loading'/> 
+          <div className='loading'>
+            <img className='gifLoading' src={gifLoading} alt='Loading'/> 
           </div> :
           
           <div>
@@ -231,9 +247,9 @@ function Home() {
                     <VideogameCard id={e.id} name={e.name} image={e.image} rating={e.rating} genres={e.genres} platforms={e.platforms} key={e.id}/>
                     )
                   }) :
-                  <div>
-                    <h2>Oh no! No videogames were found</h2>
-                    <img src={imgNotFound} alt='Not found'/> 
+                  <div className='notFound'>
+                    <h2 className='strNotFound'>Oh no! No videogames were found</h2>
+                    <img className='imgNotFound' src={imgNotFound} alt='Not found'/> 
                   </div>
               }
 
@@ -242,6 +258,8 @@ function Home() {
           </div>
 
         }
+
+      </div>
 
     </div>
   )

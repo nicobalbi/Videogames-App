@@ -1,6 +1,7 @@
 import React from "react"
 import {useDispatch, useSelector} from 'react-redux'
 import {getVideogamesSearched, setSearchValue, setPageNumber, setVideogamesSearched, setLastSearch} from '../redux/actions'
+import '../styles/SearchBar.css'
 
 
 function SearchBar() {
@@ -24,12 +25,10 @@ function SearchBar() {
   }
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <input type='text' placeholder='Buscar...' value={searchValue} onChange={handleInputChange} />
-        <button type='submit'>Buscar</button>
-      </form>
-    </div>
+    <form className='search' onSubmit={handleSubmit}>
+      <input className='input' type='text' placeholder='Search...' value={searchValue} onChange={handleInputChange} />
+      <button className='btnSearch' type='submit'>Go!</button>
+    </form>
   )
 }
 

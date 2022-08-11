@@ -2,9 +2,41 @@
   background-image: url('../images/landing.jpg');
   height: 100%;
   width: 100%;
-  background-position: center center;
+  background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   overflow: hidden;
   position: fixed;
+}
+
+.button {
+  background-color: rgb(186, 186, 186);
+  color: black;
+  padding: 15px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 12px;
+  border: 2px solid black;
+  cursor: pointer;
+  position: absolute;
+  top: 28%;
+  left: 21%;
+}
+
+.button:hover {
+  background-color: rgb(129, 129, 129);
+  color: white;
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+.title {
+  color: black;
+  position: absolute; 
+  top: 10%;
+  left: 6%;
+  background-color: rgba(129, 129, 129, 0.611);
+  padding: 10px;
+  border-radius: 12px;
 }

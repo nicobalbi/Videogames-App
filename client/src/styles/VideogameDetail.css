@@ -1,0 +1,119 @@
+.detailContainer {
+  background-image: url('../images/gray.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
+  height: auto;
+  min-height: 100vh; 
+}
+
+.loadingDetail {
+  margin: 150px auto;
+  padding: 15px;
+  width: fit-content;
+  background-color: rgba(0, 0, 0, 0.242);
+  border-radius: 20px;
+}
+
+.gifLoadingDetail {
+  border-radius: 20px;
+}
+
+.btnHome {
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid white;
+  width: fit-content;
+}
+
+.btnHome {
+  padding: 5px;
+  margin: 5px;
+  font-size: 16px;
+}
+
+.btnHome:hover {
+  color: black;
+  border: 1px solid black;
+}
+
+.deadLink {
+  margin: auto auto 200px auto;
+  padding: 15px;
+  width: fit-content;
+  background-color: rgba(0, 0, 0, 0.242);
+  border-radius: 20px;
+}
+
+.deadLinkTitle {
+  color: white;
+  margin-top: 5px;
+}
+
+.deadLinkImage {
+  border-radius: 20px;
+  /* height: 300px; */
+  width: 300px;
+}
+
+.titleDetail {
+  color: white;
+}
+
+.dataContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.imgDetailContainer {
+  width: 50%;
+}
+
+.imgDetail {
+  width: 450px;
+  height: 350px;
+  border-radius: 20px;
+  margin-left: 120px;
+}
+
+.descriptionContainer {
+  width: fit-content;
+  border: 1px solid white;
+  border-radius: 20px;
+  padding: 10px;
+  margin: auto 70px
+}
+
+.descriptionTitle {
+  margin: 1px;
+  color: white;
+}
+
+.description {
+  width: 700px;
+  height: 300px;
+  overflow: auto;
+  color: white;
+}
+
+.otherDetails {
+  display: flex;
+  justify-content: space-around;
+  margin: 30px;
+  height: 175px;
+}
+
+.dataTitle, .data {
+  color: white;
+}
+
+.groups {
+  border-radius: 10px;
+  border: 1px solid white;
+  padding: 5px;
+  margin: 5px;
+  color: white;
+}

@@ -5,12 +5,22 @@
   text-align: center;
 }
 
-.num {
+.num, .numSelected {
   display: inline-block;
   padding: 5px 10px;
   border: 1px solid #e0e0e0;  
-  background-color: #eee;
-  color: #333;
   cursor: pointer;
   transition: background 0.1s, color 0.1s;
+  margin: 5px;
+  border-radius: 8px;
+}
+
+.num {
+  background-color: white;
+  color: rgb(50, 50, 50);
+}
+
+.num:hover, .numSelected {
+  background-color: rgb(50, 50, 50);
+  color: white;
 }

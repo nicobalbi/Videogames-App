@@ -1,16 +1,154 @@
-.backHome { 
-  background-image: url('../images/gray.jpg');
+.mainContainer { 
   height: 100%;
   width: 100%;
-  background-position: center center;
+  position: fixed;
+  display: flex;
+}
+
+.mainButtons {
+  background-color: rgb(81, 81, 81);
+  height: 100%;
+  width: 25%;
+  position: sticky;
+  top: 0px;
+}
+
+.gallery {
+  background-image: url('../images/gray.jpg');
+  background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  overflow: hidden;
-  /* position: fixed; */
+  overflow-y: scroll;
+  width: 75%;
+}
+
+.topRow {
+  display: flex;
+  justify-content: space-between;
+}
+
+a, a:link, a:visited, a:hover, a:focus, a:active {
+  text-decoration: none;
+  color: inherit;
+}
+
+.btnLanding, .btnReload, .btnCreate, .btnReset {
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid white;
+}
+
+.btnLanding, .btnReload {
+  padding: 5px;
+  margin: 5px;
+  font-size: 16px;
+}
+
+.btnLanding:hover, .btnReload:hover, .btnCreate:hover, .btnReset:hover {
+  color: black;
+  border: 1px solid black;
+}
+
+.btnReload, .btnReset, .btnErase {
+  font: inherit;
+  background-color: transparent;
+}
+
+.titleHome {
+  color: white;
+}
+
+.btnCreate {
+  padding: 15px;
+  margin: 25px 25px 50px 25px;
+  display: inline-block;
+  font-size: 20px;
+  border-radius: 12px;
+}
+
+.sortContainer, .filterContainer {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+  margin: 5px auto 10px auto;
+}
+
+.filterContainer {
+  margin-left: 20px;
+  margin-right: 17px;
+}
+
+.dropdown, .dropdownSel {
+  height: 25px;
+  border-radius: 8px;
+}
+
+.dropdownSel {
+  height: 25px;
+  border-radius: 8px;
+  background-color: rgb(50, 50, 50);
+  color: white;
+}
+
+.btnReset {
+  padding: 5px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  border-radius: 8px;
+}
+
+.selected {
+  display: inline-block;
+  border: 1px solid white;
+  margin: 2px 25px 2px 25px;
+  padding: 5px;
+  color: white;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+.btnErase {
+  border: none;
+  font-size: 12px;
+  color: white;
+}
+
+.btnErase:hover {
+  color: black;
+}
+
+.loading {
+  margin: 150px auto;
+  padding: 15px;
+  width: fit-content;
+  background-color: rgba(0, 0, 0, 0.242);
+  border-radius: 20px;
+}
+
+.gifLoading {
+  border-radius: 20px;
 }
 
 .cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+}
 
+.notFound {
+  margin: 150px 0px 0px 400px;
+  padding: 15px;
+  width: fit-content;
+  background-color: rgba(0, 0, 0, 0.242);
+  border-radius: 20px;
+}
+
+.strNotFound {
+  color: white;
+}
+
+.imgNotFound {
+  border-radius: 20px;
 }
