@@ -72,8 +72,7 @@ async function postVideogame(req, res, next) {
   try {
     const nameDB = name[0].toUpperCase() + name.substring(1)
     const descriptionDB = '<p>'.concat(description).concat('</p>')
-    const ratingDB = rating === '' ? 0 : rating
-    let videogame = { name: nameDB, description: descriptionDB, image, released, rating: ratingDB, platforms, createdInDb }
+    let videogame = { name: nameDB, description: descriptionDB, image, released, rating, platforms, createdInDb }
     let videogameCreated = await Videogame.create(videogame)
     let genreDb = await Genre.findAll({
       where: {

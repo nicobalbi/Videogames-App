@@ -152,7 +152,6 @@ function Home() {
         <SearchBar />
 
         <div className='sortContainer'>
-
           <div>
             <select className={sortsValues.name !== "none" ? 'dropdownSel' : 'dropdown'} onChange={handleSortName} id='sortName'>
               <option value='none'>Sort by name</option>
@@ -160,7 +159,6 @@ function Home() {
               <option value='Descending'>Descending</option>
             </select>
           </div>
-          
           <div>
             <select className={sortsValues.rating !== "none" ? 'dropdownSel' : 'dropdown'} onChange={handleSortRating} id='sortRating'>
               <option value='none'>Sort by rating</option>
@@ -168,7 +166,6 @@ function Home() {
               <option value='Descending'>Descending</option>
             </select>
           </div>
-
         </div>
 
         <div className='filterContainer'>

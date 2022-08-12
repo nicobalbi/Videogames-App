@@ -3,23 +3,25 @@
   width: 100%;
   position: fixed;
   display: flex;
-}
-
-.mainButtons {
-  background-color: rgb(81, 81, 81);
-  height: 100%;
-  width: 25%;
-  position: sticky;
-  top: 0px;
-}
-
-.gallery {
   background-image: url('../images/gray.jpg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.mainButtons {
+  background-color: rgba(0, 0, 0, 0.304);
+  height: 100%;
+  width: 25%;
+  position: sticky;
+  top: 0px;
+  border-right: 3px solid black;
+}
+
+.gallery {
   overflow-y: scroll;
   width: 75%;
+  padding-left: 20px;
 }
 
 .topRow {
@@ -70,19 +72,20 @@ a, a:link, a:visited, a:hover, a:focus, a:active {
 
 .sortContainer, .filterContainer {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   padding: 10px;
   margin: 5px auto 10px auto;
 }
 
-.filterContainer {
+/* .filterContainer {
   margin-left: 20px;
   margin-right: 17px;
-}
+} */
 
 .dropdown, .dropdownSel {
   height: 25px;
   border-radius: 8px;
+  margin: auto 12px;
 }
 
 .dropdownSel {
@@ -135,6 +138,7 @@ a, a:link, a:visited, a:hover, a:focus, a:active {
 .cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  margin-left: 10px;
 }
 
 .notFound {

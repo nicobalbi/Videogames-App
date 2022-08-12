@@ -58,17 +58,8 @@
 .columns {
   display: flex;
   flex-direction: column;
-  margin: 1px 40px;
-}
-
-.dato {
-  margin-top: 10px;
-  margin-bottom: 30px;
-}
-
-.datoSelect {
-  margin-top: 20px;
-  margin-bottom: 30px;
+  margin: 1px 10px;
+  width: 500px;
 }
 
 label {
@@ -77,18 +68,174 @@ label {
   margin-bottom: 5px;
 }
 
+input {
+  border-radius: 4px;
+  height: 20px;
+  font-size: 16px;
+}
+
+.nameInput:focus, .nameInputError:focus, .imgURL:focus, 
+.dateInput:focus, .dateInputError:focus, .ratInput:focus, .ratInputError:focus {
+  background-color: lightgreen;
+}
+
+.error {
+  color: orange;
+  margin-top: 5px;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.nameContainer {
+  height: 130px;
+}
+
+.nameInput, .nameInputError {
+  width: 200px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.nameInput {
+  border: 2px solid black;
+}
+
+.nameInputError {
+  border: 3px solid orange;
+}
+
+.descArea, .descAreaError {
+  height: 100px;
+  width: 200px;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.descArea {
+  border: 2px solid black;
+}
+
+.descAreaError {
+  border: 3px solid orange;
+}
+
+.descArea:focus, .descAreaError:focus {
+  background-color: lightgreen;
+}
+
+.imageContainer {
+  height: 130px;
+}
+
+.imgURL {
+  width: 200px;
+}
+
+.dateContainer {
+  height: 130px;
+}
+
+.dateInput, .dateInputError {
+  width: 100px;
+  text-align: center;
+}
+
+.dateInput {
+  border: 2px solid black;
+}
+
+.dateInputError {
+  border: 3px solid orange;
+}
+
+.ratInput, .ratInputError {
+  text-align: center;
+  width: 60px;
+}
+
+.ratInput {
+  border: 2px solid black;
+}
+
+.ratInputError {
+  border: 3px solid orange;
+}
+
+select {
+  border-radius: 4px;
+  height: 30px;
+  width: 150px;
+}
+
+.selClass {
+  border: 2px solid black;
+}
+
+.selClassError {
+  border: 3px solid orange;
+}
+
+.dropContainer {
+  height: 180px;
+  margin-top: 25px;
+}
+
+.selContainer {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.selGroup {
+  border: 1px solid white;
+  margin: 2px;
+  padding: 4px;
+  color: white;
+  border-radius: 12px;
+  font-size: 12px;
+}
+
+.btnX {
+  border: none;
+  font-size: 12px;
+  color: white;
+  font: inherit;
+  background-color: transparent;
+}
+
+.btnX:hover {
+  color: black;
+}
+
 .btnCreateContainer {
   width: 20%;
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 
-.btnCreateVg {
+.btnCreateEnabled, .btnCreateDisabled {
   height: fit-content;
+  font-size: 22px;
+  background-color: green;
+  color: white;
+  padding: 15px;
+  border-radius: 10px;
+  border: 2px solid white;
+  top: 35%;
+  position: relative;
 }
 
-.disabled {
+.btnCreateEnabled {
+  cursor: pointer;
+}
+
+.btnCreateEnabled:hover {
+  background-color: white;
+  border: 2px solid black;
+  color: green;
+}
+
+.btnCreateDisabled {
   opacity: 0.6;
   cursor: not-allowed;
 }

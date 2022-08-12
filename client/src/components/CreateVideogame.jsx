@@ -18,7 +18,7 @@ function CreateVideogame() {
     description: '',
     image: '',
     released: '',
-    rating: '',
+    rating: 0,
     genres: [],
     platforms: ''
   })
@@ -33,13 +33,13 @@ function CreateVideogame() {
   function validateInput() {
     if (initialMount.current) return initialMount.current = false
     let newErrors = {}
-    if (!input.name) newErrors.name = 'Please add a name to your videogame'
-    if (!input.description) newErrors.description = 'Please add a description to your videogame'
+    if (!input.name) newErrors.name = 'Please add a name'
+    if (!input.description) newErrors.description = 'Please add a description'
     let valReleased = isValidDate(input.released)
     if (valReleased !== true) newErrors.released = valReleased
     if (input.rating < 0 || input.rating > 5) newErrors.rating = 'Rating must be a number between 0 and 5'
-    if (input.genres.length === 0) newErrors.genres = 'Please add at least one genre to your videogame'
-    if (!input.platforms) newErrors.platforms = 'Please add at least one platform to your videogame'
+    if (input.genres.length === 0) newErrors.genres = 'Please add at least one genre'
+    if (!input.platforms) newErrors.platforms = 'Please add at least one platform'
     if (Object.keys(newErrors).length === 0) setEnabled(true)
     else setEnabled(false)
     setErrors(newErrors)
@@ -47,11 +47,16 @@ function CreateVideogame() {
 
   function isValidDate(dateString) {
     if (dateString !== '') {
-      var regEx = /^\d{4}-\d{2}-\d{2}$/
+      const regEx = /^\d{4}-\d{2}-\d{2}$/
       if(!dateString.match(regEx)) return 'Released date must be in format yyyy-mm-dd'
-      var d = new Date(dateString)
-      var dNum = d.getTime()
+      const d = new Date(dateString)
+      const dNum = d.getTime()
       if(!dNum && dNum !== 0) return 'Please add a valid date'
+      const dateLocalTZ = dateString + 'T00:00:00.000-03:00'
+      const dLocal = new Date(dateLocalTZ)
+      const today = new Date()
+      const difDays = Math.ceil((dLocal - today) / (1000 * 60 * 60 * 24))
+      if (difDays > 0) return "Released date can't be greater than today"
     }
     return true
   }
@@ -61,11 +66,11 @@ function CreateVideogame() {
   }
 
   const handleSelectGenre = e => {
-    if (e.target.value !== 'none') setInput({...input, genres: [...input.genres, e.target.value]}) 
+    if (e.target.value !== 'none' && !input.genres.includes(e.target.value)) setInput({...input, genres: [...input.genres, e.target.value]}) 
   }
 
   const handleSelectPlatform = e => {
-    if (e.target.value !== 'none') setInput({...input, platforms: input.platforms.length > 0 ? input.platforms.concat(`,${e.target.value}`) : e.target.value})
+    if (e.target.value !== 'none' && !input.platforms.split(',').includes(e.target.value)) setInput({...input, platforms: input.platforms.length > 0 ? input.platforms.concat(`,${e.target.value}`) : e.target.value})
   }
 
   const handleDeleteGenre = name => {
@@ -95,7 +100,7 @@ function CreateVideogame() {
         description: '',
         image: '',
         released: '',
-        rating: '',
+        rating: 0,
         genres:[],
         platforms:''
       })
@@ -120,15 +125,15 @@ function CreateVideogame() {
 
             <div className='columns'>
 
-              <div className='dato'>
+              <div className='nameContainer'>
                 <label>Name: </label>
-                <input type='text' value={input.name} name='name' onChange={handleInputChange} />
+                <input className={errors.name ? 'nameInputError' : 'nameInput'} type='text' value={input.name} name='name' onChange={handleInputChange} />
                 {errors.name && <p className='error'>{errors.name}</p>}
               </div>
 
-              <div className='dato'>
+              <div className='descContainer'>
                 <label>Description: </label>
-                <textarea type='text' value={input.description} name='description' onChange={handleInputChange} />
+                <textarea className={errors.description ? 'descAreaError' : 'descArea'} type='text' value={input.description} name='description' onChange={handleInputChange} />
                 {errors.description && <p className='error'>{errors.description}</p>}
               </div>
 
@@ -136,20 +141,20 @@ function CreateVideogame() {
 
             <div className='columns'>
 
-              <div className='dato'>
+              <div className='imageContainer'>
                 <label>Image URL: </label>
-                <input type='text' value={input.image} name='image' onChange={handleInputChange} />
+                <input className='imgURL' type='text' value={input.image} name='image' onChange={handleInputChange} />
               </div>
 
-              <div className='dato'>
+              <div className='dateContainer'>
                 <label>Released date: </label>
-                <input type='text' value={input.released} name='released' onChange={handleInputChange} />
+                <input className={errors.released ? 'dateInputError' : 'dateInput'} type='text' value={input.released} name='released' onChange={handleInputChange} />
                 {errors.released && <p className='error'>{errors.released}</p>}
               </div>
 
-              <div className='dato'>
+              <div className='ratContainer'>
                 <label>Rating: </label>
-                <input type='text' value={input.rating} name='rating' onChange={handleInputChange} />
+                <input className={errors.rating ? 'ratInputError' : 'ratInput'} type='number' min='0.0' max='100' step='0.1' value={input.rating} name='rating' onChange={handleInputChange} />
                 {errors.rating && <p className='error'>{errors.rating}</p>}
               </div>
 
@@ -157,8 +162,8 @@ function CreateVideogame() {
 
             <div className='columns'>
 
-              <div className='datoSelect'>
-                <select onChange={handleSelectGenre}>
+              <div className='dropContainer'>
+                <select className={errors.genres ? 'selClassError' : 'selClass'} onChange={handleSelectGenre}>
                   <option value='none'>Select genres</option>
                   {
                     genres.map(g => {
@@ -169,21 +174,20 @@ function CreateVideogame() {
                     }
                 </select>
                 {errors.genres && <p className='error'>{errors.genres}</p>}
-                <div>
-                  <h4>Selected genres</h4>
+                <div className='selContainer'>
                   {input.genres.map(g => {
                     return (
-                      <div className='divGenre' key={g}>
-                        <p>{g}</p>
-                        <button className='botonX' onClick={() => handleDeleteGenre(g)}>X</button> 
+                      <div className='selGroup' key={g}>
+                        <span>{g}</span>
+                        <button className='btnX' onClick={() => handleDeleteGenre(g)}>X</button> 
                       </div>
                     )
                   })}
                 </div>
               </div>
 
-              <div className='datoSelect'>
-                <select onChange={handleSelectPlatform}>
+              <div className='dropContainer'>
+                <select className={errors.platforms ? 'selClassError' : 'selClass'} onChange={handleSelectPlatform}>
                   <option value='none'>Select platforms</option>
                   <option value='Android'>Android</option>
                   <option value='Game Boy'>Game Boy</option>
@@ -206,13 +210,12 @@ function CreateVideogame() {
                   <option value='Xbox One'>Xbox One</option>
                 </select>
                 {errors.platforms && <p className='error'>{errors.platforms}</p>}
-                <div>
-                  <h4>Selected platforms</h4>
+                <div className='selContainer'>
                   {input.platforms && input.platforms.split(',').map(p => {
                     return (
-                      <div className='divPlatform' key={p}>
-                        <p>{p}</p>
-                        <button className='botonX' onClick={() => handleDeletePlatform(p)}>X</button> 
+                      <div className='selGroup' key={p}>
+                        <span>{p}</span>
+                        <button className='btnX' onClick={() => handleDeletePlatform(p)}>X</button> 
                       </div>
                     )
                   })}
@@ -224,7 +227,7 @@ function CreateVideogame() {
           </div>
 
           <div className='btnCreateContainer'>
-            <button className='btnCreateVg' type='submit'>Create Videogame</button>
+            <button className={enabled ? 'btnCreateEnabled' : 'btnCreateDisabled'} type='submit'>Create</button>
           </div>
 
         </form>

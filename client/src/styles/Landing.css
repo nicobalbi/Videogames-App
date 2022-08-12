@@ -23,6 +23,7 @@
   position: absolute;
   top: 28%;
   left: 21%;
+  font-weight: bold;
 }
 
 .button:hover {
@@ -32,11 +33,11 @@
 }
 
 .title {
-  color: black;
+  color: green;
   position: absolute; 
   top: 10%;
   left: 6%;
-  background-color: rgba(129, 129, 129, 0.611);
+  background-color: rgba(196, 195, 195, 0.656);
   padding: 10px;
   border-radius: 12px;
 }
