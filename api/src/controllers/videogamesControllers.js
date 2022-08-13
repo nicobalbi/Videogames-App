@@ -19,16 +19,15 @@ async function getVideogamesFromApi(name) {
   } else {
     videogamesApi = (await axios(urlApiSearch)).data.results.slice(0,15)
   }
-
   let videogamesApiMapped = videogamesApi.map(v => {
       return {
         id: v.id, 
         name: v.name,
         image: v.background_image, 
         released: v.released,
-        rating: v.rating,
-        genres: v.genres.map(g => g),
-        platforms: v.platforms.map(p => p.platform.name).join()
+        rating: v.ratings.length > 0 ? v.rating : 'Not rated',
+        genres: v.genres ? v.genres.map(g => g) : [],
+        platforms: v.platforms ? v.platforms.map(p => p.platform.name).join() : ''
       }
     })
 
@@ -72,7 +71,8 @@ async function postVideogame(req, res, next) {
   try {
     const nameDB = name[0].toUpperCase() + name.substring(1)
     const descriptionDB = '<p>'.concat(description).concat('</p>')
-    let videogame = { name: nameDB, description: descriptionDB, image, released, rating, platforms, createdInDb }
+    const ratingDB = rating === '' ? 'Not rated' : rating
+    let videogame = { name: nameDB, description: descriptionDB, image, released, rating: ratingDB, platforms, createdInDb }
     let videogameCreated = await Videogame.create(videogame)
     let genreDb = await Genre.findAll({
       where: {

@@ -18,7 +18,7 @@ function CreateVideogame() {
     description: '',
     image: '',
     released: '',
-    rating: 0,
+    rating: '',
     genres: [],
     platforms: ''
   })
@@ -35,6 +35,8 @@ function CreateVideogame() {
     let newErrors = {}
     if (!input.name) newErrors.name = 'Please add a name'
     if (!input.description) newErrors.description = 'Please add a description'
+    let valImage = isValidImage(input.image)
+    if (valImage !== true) newErrors.image = 'Image URL must have a valid format:|http(s):// + .png/.jpg/.gif'
     let valReleased = isValidDate(input.released)
     if (valReleased !== true) newErrors.released = valReleased
     if (input.rating < 0 || input.rating > 5) newErrors.rating = 'Rating must be a number between 0 and 5'
@@ -59,6 +61,10 @@ function CreateVideogame() {
       if (difDays > 0) return "Released date can't be greater than today"
     }
     return true
+  }
+
+  function isValidImage(urlString) {
+    return urlString === '' ? true : /^https?:\/\/.+\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(urlString);
   }
 
   const handleInputChange = e => {
@@ -100,7 +106,7 @@ function CreateVideogame() {
         description: '',
         image: '',
         released: '',
-        rating: 0,
+        rating: '',
         genres:[],
         platforms:''
       })
@@ -112,10 +118,10 @@ function CreateVideogame() {
     <div className='createContainer'>
       
       <Link to='/home'>
-        <div className='btnHome'>Back to home</div>
+        <div className='btnHomeCreate'>Back to home</div>
       </Link>
 
-      <h1 className='titleCreate'>Create your videogame!</h1>
+      <h2 className='titleCreate'>Create your videogame!</h2>
 
       <div className='formContainer' onSubmit={handleSubmit}>
 
@@ -123,7 +129,7 @@ function CreateVideogame() {
 
           <div className='formData'>
 
-            <div className='columns'>
+            <div className='column1'>
 
               <div className='nameContainer'>
                 <label>Name: </label>
@@ -137,14 +143,15 @@ function CreateVideogame() {
                 {errors.description && <p className='error'>{errors.description}</p>}
               </div>
 
-            </div>
-
-            <div className='columns'>
-
               <div className='imageContainer'>
                 <label>Image URL: </label>
                 <input className='imgURL' type='text' value={input.image} name='image' onChange={handleInputChange} />
+                {errors.image && <p className='error'>{errors.image.split('|')[0]}<br></br>{errors.image.split('|')[1]}</p>}
               </div>
+
+            </div>
+
+            <div className='column2'>
 
               <div className='dateContainer'>
                 <label>Released date: </label>
@@ -160,7 +167,7 @@ function CreateVideogame() {
 
             </div>
 
-            <div className='columns'>
+            <div className='column3'>
 
               <div className='dropContainer'>
                 <select className={errors.genres ? 'selClassError' : 'selClass'} onChange={handleSelectGenre}>

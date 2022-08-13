@@ -21,17 +21,32 @@ function Paginate() {
     dispatch(setPageNumber(num))
   }
 
+  const handlePrevious = () => {
+    if (pageNumber > 1) dispatch(setPageNumber(pageNumber - 1))
+  }
+  
+  const handleNext = () => {
+    if (pageNumber < pageNumbers[pageNumbers.length - 1]) dispatch(setPageNumber(pageNumber + 1))
+  }
+
   return (
     <nav>
-      <ul className="paginate">
-        { pageNumbers?.map(num => {
-          return (
-            <li className={num === pageNumber ? "numSelected" : "num"} key={num} onClick={() => handlePaginate(num)}>
-              <span>{num}</span>
-            </li>
-          )
-        })}
-      </ul>
+        { 
+          pageNumbers.length > 0 &&
+          <ul className="paginate">
+              <li className="arrow" onClick={() => handlePrevious()}>{'<'}</li>
+              {
+                pageNumbers.map(num => {
+                  return (
+                    <li className={num === pageNumber ? "numSelected" : "num"} key={num} onClick={() => handlePaginate(num)}>
+                    <span>{num}</span>
+                    </li>
+                  )
+                })
+              }
+              <li className="arrow" onClick={() => handleNext()}>{'>'}</li>
+          </ul>
+        }
     </nav>
   )
 }

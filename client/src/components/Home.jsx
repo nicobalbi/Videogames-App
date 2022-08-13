@@ -62,8 +62,16 @@ function Home() {
     if (videogamesSearched.length > 0) newVideogamesRendered = [...videogamesSearched];
 
     [...sorts].reverse().forEach(sort => {
+      if (sort === 'rating') {
+        var vNotRated = newVideogamesRendered.filter(v => v.rating === 'Not rated')
+        newVideogamesRendered = newVideogamesRendered.filter(v => v.rating !== 'Not rated')
+      }
       if (sortsValues[sort] === 'Ascending') newVideogamesRendered.sort((a, b) => a[sort] < b[sort] ? -1 : a[sort] > b[sort] ? 1 : 0)
       if (sortsValues[sort] === 'Descending') newVideogamesRendered.sort((a, b) => a[sort] > b[sort] ? -1 : a[sort] < b[sort] ? 1 : 0)
+      if (sort === 'rating') {
+        if (sortsValues[sort] === 'Ascending') newVideogamesRendered = [...vNotRated, ...newVideogamesRendered]
+        if (sortsValues[sort] === 'Descending') newVideogamesRendered = [...newVideogamesRendered, ...vNotRated]
+      }
     })
 
     filters.forEach(filter => {
@@ -245,7 +253,7 @@ function Home() {
                     )
                   }) :
                   <div className='notFound'>
-                    <h2 className='strNotFound'>Oh no! No videogames were found</h2>
+                    <h1 className='strNotFound'>Oh no! No videogames were found</h1>
                     <img className='imgNotFound' src={imgNotFound} alt='Not found'/> 
                   </div>
               }

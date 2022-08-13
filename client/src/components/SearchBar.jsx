@@ -27,7 +27,8 @@ function SearchBar() {
   return (
     <form className='search' onSubmit={handleSubmit}>
       <input className='input' type='text' placeholder='Search...' value={searchValue} onChange={handleInputChange} />
-      <button className='btnSearch' type='submit'>Go!</button>
+      {/* <button className='btnSearch' type='submit'>Go!</button> */}
+      <button className='btnGlass' type='submit'></button>
     </form>
   )
 }

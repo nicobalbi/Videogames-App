@@ -20,7 +20,7 @@ async function getVideogameByID(req, res, next) {
             image: videogameApi.background_image, 
             description: videogameApi.description,
             released: videogameApi.released,
-            rating: videogameApi.rating,
+            rating: videogameApi.ratings.length > 0 ? videogameApi.rating : 'Not rated',
             genres: videogameApi.genres.map(g => g),
             platforms: videogameApi.platforms.map(p => p.platform.name).join()
           }
@@ -28,7 +28,7 @@ async function getVideogameByID(req, res, next) {
       }
       res.json(videogame)
     } catch (error) {
-      res.send('Videogame not found')
+      res.send(`Videogame id ${idVideogame} not found`)
     }
   }
 }

@@ -3,14 +3,16 @@
   width: 100%;
   position: fixed;
   display: flex;
-  background-image: url('../images/gray.jpg');
+  /* background-image: url('../images/gray.jpg'); */
+  background-image: url('../images/landing.jpg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 .mainButtons {
-  background-color: rgba(0, 0, 0, 0.304);
+  /* background-color: rgba(0, 0, 0, 0.304); */
+  background-color: rgba(0, 0, 0, 0.701);
   height: 100%;
   width: 25%;
   position: sticky;
@@ -48,14 +50,31 @@ a, a:link, a:visited, a:hover, a:focus, a:active {
   font-size: 16px;
 }
 
-.btnLanding:hover, .btnReload:hover, .btnCreate:hover, .btnReset:hover {
-  color: black;
-  border: 1px solid black;
+.btnLanding {
+  background-color: rgba(66, 66, 66, 0.94);
 }
 
-.btnReload, .btnReset, .btnErase {
+.btnLanding:hover {
+  color: rgb(66, 66, 66);
+  border: 1px solid rgb(66, 66, 66);
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.btnErase {
   font: inherit;
   background-color: transparent;
+}
+
+.btnReload {
+  font: inherit;
+  background-color: rgba(0, 0, 139, 0.804);
+  border-radius: 8px;
+}
+
+.btnReload:hover {
+  color: rgba(0, 0, 139);
+  border: 1px solid rgba(0, 0, 139);
+  background-color: rgba(255, 255, 255, 0.8);
 }
 
 .titleHome {
@@ -68,6 +87,13 @@ a, a:link, a:visited, a:hover, a:focus, a:active {
   display: inline-block;
   font-size: 20px;
   border-radius: 12px;
+  background-color: rgba(0, 128, 0, 0.803);
+}
+
+.btnCreate:hover {
+  color: rgb(0, 128, 0);
+  border: 1px solid rgb(0, 128, 0);
+  background-color: rgba(255, 255, 255, 0.8);
 }
 
 .sortContainer, .filterContainer {
@@ -101,6 +127,14 @@ a, a:link, a:visited, a:hover, a:focus, a:active {
   margin-bottom: 20px;
   font-size: 16px;
   border-radius: 8px;
+  font: inherit;
+  background-color: rgba(255, 0, 0, 0.801);
+}
+
+.btnReset:hover {
+  color: rgb(255, 0, 0);
+  border: 1px solid rgb(255, 0, 0);
+  background-color: rgba(255, 255, 255, 0.8);
 }
 
 .selected {
@@ -127,8 +161,9 @@ a, a:link, a:visited, a:hover, a:focus, a:active {
   margin: 150px auto;
   padding: 15px;
   width: fit-content;
-  background-color: rgba(0, 0, 0, 0.242);
+  background-color: rgba(0, 0, 0, 0.734);
   border-radius: 20px;
+  height: fit-content;
 }
 
 .gifLoading {
@@ -142,10 +177,10 @@ a, a:link, a:visited, a:hover, a:focus, a:active {
 }
 
 .notFound {
-  margin: 150px 0px 0px 400px;
+  margin: 150px 0px 0px 350px;
   padding: 15px;
   width: fit-content;
-  background-color: rgba(0, 0, 0, 0.242);
+  background-color: rgba(0, 0, 0, 0.701);
   border-radius: 20px;
 }
 
@@ -155,4 +190,5 @@ a, a:link, a:visited, a:hover, a:focus, a:active {
 
 .imgNotFound {
   border-radius: 20px;
+  width: 370px;
 }
