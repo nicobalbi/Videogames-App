@@ -39,7 +39,7 @@
   width: fit-content;
   border-radius: 20px;
   position: absolute;
-  top: 10%;
+  top: 12%;
   left: 18%;
 }
 
@@ -47,7 +47,7 @@
   display: flex;
   justify-content: center;
   position: absolute;
-  top: 25%;
+  top: 27%;
   left: 18%;
 }
 
@@ -217,24 +217,39 @@ select {
   margin-top: 8px;
 }
 
-.selGroup {
-  border: 1px solid white;
+.selGroupGen, .selGroupPlat {
   margin: 2px;
   padding: 4px;
-  color: white;
   border-radius: 12px;
   font-size: 12px;
 }
 
-.btnX {
+.selGroupGen {
+  border: 1px solid rgb(84, 249, 255);
+  color: rgb(84, 249, 255);
+}
+
+.selGroupPlat {
+  border: 1px solid rgb(214, 119, 255);
+  color: rgb(214, 119, 255);
+}
+
+.btnXGen, .btnXPlat {
   border: none;
   font-size: 12px;
-  color: white;
   font: inherit;
   background-color: transparent;
 }
 
-.btnX:hover {
+.btnXGen {
+  color: rgb(84, 249, 255);
+}
+
+.btnXPlat {
+  color: rgb(214, 119, 255);
+}
+
+.btnXGen:hover, .btnXPlat:hover {
   color: black;
 }
 

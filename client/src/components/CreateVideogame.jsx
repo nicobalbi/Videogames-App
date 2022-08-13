@@ -65,6 +65,9 @@ function CreateVideogame() {
 
   function isValidImage(urlString) {
     return urlString === '' ? true : /^https?:\/\/.+\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(urlString);
+    // return urlString === '' ? true : /^http[^\?]*.(jpg|jpeg|gif|png|tiff|bmp)(\?(.*))?$/gmi.test(urlString);
+    // return urlString === '' ? true : /^http[^\?]*.(jpg|jpeg|gif|png|tiff|bmp)(.*)?$/gmi.test(urlString);
+    // return urlString === '' ? true : /^http[^\?]*.(jpg|jpeg|gif|png|tiff|bmp)((\?|\/)(.*))?$/gmi.test(urlString);
   }
 
   const handleInputChange = e => {
@@ -184,9 +187,9 @@ function CreateVideogame() {
                 <div className='selContainer'>
                   {input.genres.map(g => {
                     return (
-                      <div className='selGroup' key={g}>
+                      <div className='selGroupGen' key={g}>
                         <span>{g}</span>
-                        <button className='btnX' onClick={() => handleDeleteGenre(g)}>X</button> 
+                        <button className='btnXGen' onClick={() => handleDeleteGenre(g)}>X</button> 
                       </div>
                     )
                   })}
@@ -220,9 +223,9 @@ function CreateVideogame() {
                 <div className='selContainer'>
                   {input.platforms && input.platforms.split(',').map(p => {
                     return (
-                      <div className='selGroup' key={p}>
+                      <div className='selGroupPlat' key={p}>
                         <span>{p}</span>
-                        <button className='btnX' onClick={() => handleDeletePlatform(p)}>X</button> 
+                        <button className='btnXPlat' onClick={() => handleDeletePlatform(p)}>X</button> 
                       </div>
                     )
                   })}

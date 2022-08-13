@@ -34,7 +34,7 @@ function Paginate() {
         { 
           pageNumbers.length > 0 &&
           <ul className="paginate">
-              <li className="arrow" onClick={() => handlePrevious()}>{'<'}</li>
+              {pageNumbers.length > 1 && <li className="arrow" onClick={() => handlePrevious()}>{'<'}</li>}
               {
                 pageNumbers.map(num => {
                   return (
@@ -44,7 +44,7 @@ function Paginate() {
                   )
                 })
               }
-              <li className="arrow" onClick={() => handleNext()}>{'>'}</li>
+              {pageNumbers.length > 1 && <li className="arrow" onClick={() => handleNext()}>{'>'}</li>}
           </ul>
         }
     </nav>

@@ -21,7 +21,7 @@
   border: 2px solid black;
   cursor: pointer;
   position: absolute;
-  top: 28%;
+  top: 30%;
   left: 21%;
   font-weight: bold;
 }
@@ -35,7 +35,7 @@
 .title {
   color: green;
   position: absolute; 
-  top: 10%;
+  top: 12%;
   left: 6%;
   background-color: rgba(196, 195, 195, 0.656);
   padding: 10px;

@@ -116,7 +116,7 @@ function VideogameDetail(props) {
                       videogameDetail[0].genres.length > 0 ?
                       [...videogameDetail[0].genres].sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0).map(g => {
                         return (  
-                          <span className='groups' key={g.name}>{g.name}</span>
+                          <span className='groupGen' key={g.name}>{g.name}</span>
                           )
                         }) :
                       <div className="data">(No genres assigned)</div>
@@ -131,7 +131,7 @@ function VideogameDetail(props) {
                       videogameDetail[0].platforms.length > 0 ?
                       videogameDetail[0].platforms.split(',').sort((a, b) => a < b ? -1 : a > b ? 1 : 0).map(p => {
                         return (
-                          <span className='groups' key={p}>{p}</span>
+                          <span className='groupPlat' key={p}>{p}</span>
                           )
                         }) :
                       <div className="data">(No platforms assigned)</div>

@@ -80,6 +80,7 @@
   position: absolute;
   height: 610px;
   border-radius: 20px;
+  margin-top: 20px;
 }
 
 .titleDetail {
@@ -177,9 +178,10 @@
 
 .ratingD {
   /* padding: auto; */
-  color: white;
+  color: rgb(232, 232, 16);
   width: fit-content;
   font-size: 18px;
+  font-weight: bold;
   /* height: 20px; */
   text-align: center;
   vertical-align: middle;
@@ -193,10 +195,18 @@
   justify-content: center;
 }
 
-.groups {
+.groupGen, .groupPlat {
   border-radius: 10px;
-  border: 1px solid white;
   padding: 5px;
   margin: 1px;
-  color: white;
+}
+
+.groupGen {
+  border: 1px solid rgb(84, 249, 255);
+  color: rgb(84, 249, 255);
+}
+
+.groupPlat {
+  border: 1px solid rgb(214, 119, 255);
+  color: rgb(214, 119, 255);
 }
