@@ -1,26 +1,27 @@
 import React, {useState, useEffect, useRef} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {Link, useHistory} from 'react-router-dom'
-import {postVideogame, getGenres, setVideogamesAll} from '../redux/actions'
+import {updateVideogame, getGenres, setVideogamesAll, setVideogameDetail} from '../redux/actions'
 import '../styles/CreateVideogame.css'
 
-function CreateVideogame() {
+function UpdateVideogame() {
   
   const dispatch = useDispatch()
   const history = useHistory()
   const initialMount = useRef(true)
   const genres = useSelector(state => state.genres)
+  const videogameDetail = useSelector(state => state.videogameDetail)
   const [errors, setErrors] = useState({})
-  const [enabled, setEnabled] = useState(false)
+  const [enabled, setEnabled] = useState(true)
   
   const [input, setInput] = useState({
-    name: '',
-    description: '',
-    image: '',
-    released: '',
-    rating: '',
-    genres: [],
-    platforms: ''
+    name: videogameDetail[0].name,
+    description: videogameDetail[0].description.replace('<p>','').replace('</p>',''),
+    image: videogameDetail[0].image,
+    released: videogameDetail[0].released,
+    rating: videogameDetail[0].rating === 'Not rated' ? '' : videogameDetail[0].rating,
+    genres: videogameDetail[0].genres ? videogameDetail[0].genres.map(g => g.name) : [],
+    platforms: videogameDetail[0].platforms
   })
   
   useEffect(() => loadCreateData(), [dispatch])     // eslint-disable-line react-hooks/exhaustive-deps
@@ -98,18 +99,10 @@ function CreateVideogame() {
         }
       }
     }
-    dispatch(postVideogame(input))
+    dispatch(updateVideogame(videogameDetail[0].id, input))
     dispatch(setVideogamesAll([]))
-    alert(`Videogame ${input.name} created!`)
-    setInput({
-      name: '',
-      description: '',
-      image: '',
-      released: '',
-      rating: '',
-      genres:[],
-      platforms:''
-    })
+    dispatch(setVideogameDetail([]))
+    alert(`Videogame ${input.name} updated!`)
     history.push('/home')
   }
 
@@ -234,7 +227,7 @@ function CreateVideogame() {
           </div>
 
           <div className='btnCreateContainer'>
-            <button className={enabled ? 'btnCreateEnabled' : 'btnCreateDisabled'} type='submit'>Create</button>
+            <button className={enabled ? 'btnUpdateEnabled' : 'btnUpdateDisabled'} type='submit'>Update</button>
           </div>
 
         </form>
@@ -246,4 +239,4 @@ function CreateVideogame() {
   )
 }
   
-export default CreateVideogame
+export default UpdateVideogame

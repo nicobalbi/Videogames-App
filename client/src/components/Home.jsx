@@ -34,6 +34,7 @@ function Home() {
   const loadHomeData = () => {
     if (videogamesAll.length === 0) dispatch(getVideogamesAll())
     if (genres.length === 0) dispatch(getGenres())
+    handleReset()
   }
 
   const handleReload = () => {

@@ -85,6 +85,47 @@
 
 .titleDetail {
   color: white;
+  text-align: center;
+}
+
+.buttonsContainer {
+  display: inline;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 130px;
+  top: 32px
+}
+
+.btnUpdate, .btnDelete {
+  font-size: 18px;
+  padding: 10px;
+  color: white;
+  border: 1px solid white;
+  border-radius: 12px;
+  margin: auto 20px;
+  cursor: pointer;
+  display: inline;
+}
+
+.btnUpdate {
+  background-color: rgb(0, 0, 200);
+}
+
+.btnDelete {
+  background-color: rgb(200, 0, 0);
+}
+
+.btnUpdate:hover {
+  background-color: white;
+  color: rgb(0, 0, 200);
+  border: 1px solid rgb(0, 0, 200);
+}
+
+.btnDelete:hover {
+  background-color: white;
+  color: rgb(200, 0, 0);
+  border: 1px solid rgb(200, 0, 0);
 }
 
 .dataContainer {

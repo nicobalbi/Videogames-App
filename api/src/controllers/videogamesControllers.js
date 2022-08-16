@@ -68,6 +68,7 @@ async function getVideogames(req, res, next) {
 
 async function postVideogame(req, res, next) {
   const { name, description, image, released, rating, genres, platforms, createdInDb } = req.body
+  if (!name || !description || !genres.length || !platforms) return res.sendStatus(400)
   try {
     const nameDB = name[0].toUpperCase() + name.substring(1)
     const descriptionDB = '<p>'.concat(description).concat('</p>')
@@ -80,7 +81,7 @@ async function postVideogame(req, res, next) {
       } 
     })
     videogameCreated.addGenre(genreDb)
-    res.send(`Videogame ${name} generado con exito`)
+    res.send(`Videogame ${name} created`)
   } catch (error) {
     next(error)
   }

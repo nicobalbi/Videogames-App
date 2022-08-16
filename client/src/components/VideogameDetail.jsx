@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import {Link} from 'react-router-dom'
-import {getVideogameDetail} from '../redux/actions'
+import {Link, useHistory} from 'react-router-dom'
+import {getVideogameDetail, deleteVideogame, setVideogamesAll} from '../redux/actions'
 import Parser from 'html-react-parser'
 import imgBrokenLink from '../images/ghost.png'
 import gifLoading from '../images/pacman.gif'
@@ -22,6 +22,7 @@ import imgRat5 from '../images/5stars.png'
 function VideogameDetail(props) {
 
   const dispatch = useDispatch()
+  const history = useHistory()
 
   const videogameDetail = useSelector(state => state.videogameDetail)
   
@@ -32,6 +33,13 @@ function VideogameDetail(props) {
       || (typeof videogameDetail === 'string' && videogameDetail.split(' ')[2] !== props.match.params.id)) dispatch(getVideogameDetail(props.match.params.id))
   }
   
+  const handleDelete = () => {
+    dispatch(deleteVideogame(props.match.params.id))
+    dispatch(setVideogamesAll([]))
+    alert(`Videogame ${videogameDetail[0].name} deleted!`)
+    history.push('/home')
+  }
+
   const imgRating = rat => {
     if (rat < 0.25) return imgRat0
     if (rat < 0.75) return imgRat05
@@ -78,6 +86,16 @@ function VideogameDetail(props) {
 
               <h1 className='titleDetail'>{videogameDetail[0].name}</h1>
               
+              {
+                videogameDetail[0].hasOwnProperty('createdInDb') &&
+                <div className='buttonsContainer'>
+                  <Link to={`/update/${videogameDetail[0].id}`}>
+                    <div className='btnUpdate'>Update</div>
+                  </Link>
+                  <div className='btnDelete' onClick={handleDelete}>Delete</div>
+                </div>
+              }
+
               <div className='dataContainer'>
 
                 <div className='imgDetailContainer'>

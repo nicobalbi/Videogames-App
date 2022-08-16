@@ -14,6 +14,7 @@ export const SET_PAGE_NUMBER = 'SET_PAGE_NUMBER'
 export const SET_VIDEOGAMES_SEARCHED = 'SET_VIDEOGAMES_SEARCHED'
 export const SET_LAST_SEARCH = 'SET_LAST_SEARCH'
 export const SET_VIDEOGAMES_ALL = 'SET_VIDEOGAMES_ALL'
+export const SET_VIDEOGAME_DETAIL = 'SET_VIDEOGAME_DETAIL'
 
 export function getVideogamesAll() {
   return (dispatch) => {
@@ -45,6 +46,22 @@ export function getVideogameDetail(id) {
 export function postVideogame(values) {
   return (dispatch) => {
     return axios.post('http://localhost:3001/videogames', values)
+    .then(res => console.log(res))
+    .catch(error => console.log(error))
+  }
+}
+
+export function deleteVideogame(id) {
+  return (dispatch) => {
+    return axios.delete(`http://localhost:3001/videogame/${id}`)
+    .then(res => console.log(res))
+    .catch(error => console.log(error))
+  }
+}
+
+export function updateVideogame(id, values) {
+  return (dispatch) => {
+    return axios.put(`http://localhost:3001/videogame/${id}`, values)
     .then(res => console.log(res))
     .catch(error => console.log(error))
   }
@@ -124,6 +141,13 @@ export function setLastSearch(payload) {
 export function setVideogamesAll(payload) {
   return {
     type: SET_VIDEOGAMES_ALL,
+    payload: payload
+  }
+}
+
+export function setVideogameDetail(payload) {
+  return {
+    type: SET_VIDEOGAME_DETAIL,
     payload: payload
   }
 }

@@ -10,6 +10,7 @@
   align-items: center;
   /* background-color: rgba(0, 128, 0, 0.466); */
   background-color: rgba(0, 96, 0, 0.908);
+  transition-delay: 0.05s;
 }
 
 .card:hover {
@@ -91,5 +92,5 @@
 }
 
 .noneAssigned {
-  color: white;
+  color: rgb(84, 249, 255);
 }
