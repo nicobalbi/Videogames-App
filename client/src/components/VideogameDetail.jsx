@@ -112,6 +112,11 @@ function VideogameDetail(props) {
               <div className='otherDetails'>
                 
                 <div className='detailCol1'>
+                  <h3 className='dataTitle'>Website</h3>
+                  <div className='data'>{videogameDetail[0].website ? videogameDetail[0].website : '(Website not specified)'}</div>
+                </div>
+
+                <div className='detailCol1'>
                   <h3 className='dataTitle'>Released date</h3>
                   <div className='data'>{videogameDetail[0].released ? videogameDetail[0].released : '(Realeased date not specified)'}</div>
                 </div>

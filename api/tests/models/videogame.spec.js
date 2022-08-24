@@ -15,7 +15,7 @@ describe('Videogame model', () => {
     describe('name', () => {
 
       it('should throw an error if name is not send', (done) => {
-        Videogame.create({ description: 'multiplayer game', platforms: 'PC' })
+        Videogame.create({ description: 'multiplayer game', platforms: 'PlayStation' })
           .then(() => done(new Error('It requires a valid name')))
           .catch(() => done());
       });
@@ -26,25 +26,25 @@ describe('Videogame model', () => {
           .catch(() => done());
       });
 
-      it('should throw an error if no platform is send', (done) => {
-        Videogame.create({ name: 'Among us', description: 'multiplayer game' })
+      it('should throw an error if platform is not send', (done) => {
+        Videogame.create({ name: 'Among others', description: 'others game' })
           .then(() => done(new Error('It requires a valid platform')))
           .catch(() => done());
       });
 
       it('should create the Videogame if all required properties are ok', async () => {
         const vg = await Videogame.create({ 
-          name: 'Among us', 
-          description: 'multiplayer game', 
+          name: 'CS GO GO GO', 
+          description: 'skill game', 
           platforms: 'PC' 
         })
-        expect(vg.name).to.be.equal('Among us')
-        expect(vg.description).to.be.equal('multiplayer game')
+        expect(vg.name).to.be.equal('CS GO GO GO')
+        expect(vg.description).to.be.equal('skill game')
         expect(vg.platforms).to.be.equal('PC')
         expect(vg.createdInDb).to.be.equal(true)
         expect(vg.id.length).to.be.equal(36)
-
       });
+
     });
   });
 });

@@ -23,7 +23,8 @@ async function getVideogameByID(req, res, next) {
             released: videogameApi.released,
             rating: videogameApi.ratings.length > 0 ? videogameApi.rating : 'Not rated',
             genres: videogameApi.genres.map(g => g),
-            platforms: videogameApi.platforms.map(p => p.platform.name).join()
+            platforms: videogameApi.platforms.map(p => p.platform.name).join(),
+            website: videogameApi.website
           }
         ]
       }

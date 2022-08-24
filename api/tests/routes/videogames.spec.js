@@ -2,14 +2,9 @@
 const { expect } = require('chai');
 const session = require('supertest-session');
 const app = require('../../src/app.js');
-const { Videogame, conn } = require('../../src/db.js');
+const { Videogame, Genre, conn } = require('../../src/db.js');
 
 const agent = session(app);
-const videogame = {
-  name: 'Super Mario Bros',
-  description: 'Players control Mario, or his brother Luigi in the multiplayer mode, as they traverse the Mushroom Kingdom to rescue Princess Toadstool from King Koopa (later named Bowser).',
-  platforms: 'Nintendo 64, Game Cube'
-};
 
 describe('Videogame routes', () => {
 
@@ -18,21 +13,16 @@ describe('Videogame routes', () => {
     console.error('Unable to connect to the database:', err);
   }));
 
-  beforeEach(() => conn.sync({ force: true })
-    .then(() => Videogame.create(videogame)));
+  beforeEach(() => conn.sync({ force: true }))
 
   describe('GET /videogames', () => {
     
-    it('should reply the GET method with status code 200', async () => {
+    it('should reply the GET method with status code 200 and an array of videogames greater than or equal to 100', async () => {
       const res = await agent.get('/videogames');
       expect(res.statusCode).to.equal(200);
-    }).timeout(20000);
-    
-    it('should reply the GET method with an array of videogames greater than or equal to 100', async () => {
-      const res = await agent.get('/videogames');
       expect(res.body.length).to.be.greaterThanOrEqual(100);
     }).timeout(20000);
-  
+      
   });
 
   describe('POST /videogames', () => {
@@ -42,14 +32,21 @@ describe('Videogame routes', () => {
       expect(res.statusCode).to.be.equal(400);
     });
 
-    it('should reply the POST method with status code 200 if required data is send', async () => {
+    it('should reply the POST method with status code 200 and add the videogame to the database if required data is send', async () => {
       const res = await agent.post('/videogames').send({ 
         name: 'Among us', 
         description: 'multiplayer game',
         genres: ['Strategy', 'Simulation'], 
-        platforms: 'PC' 
+        platforms: 'iOS' 
       });
       expect(res.statusCode).to.be.equal(200);
+      const videogames = await Videogame.findAll({include: Genre})
+      expect(videogames.length).to.be.equal(1) 
+      expect(videogames[0].name).to.be.equal('Among us') 
+      expect(videogames[0].description).to.be.equal('<p>multiplayer game</p>') 
+      expect(videogames[0].platforms).to.be.equal('iOS') 
+      expect(videogames[0].createdInDb).to.be.equal(true) 
+      expect(videogames[0].id.length).to.be.equal(36) 
     });
   
   });
