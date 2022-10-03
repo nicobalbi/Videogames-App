@@ -4,8 +4,8 @@
 
 # Videogames App - Individual Project :video_game:
 
-![ImgAppLanding](https://github.com/nicobalbi/PI-Videogames-main/blob/main/client/src/images/landingPrint.png)
-![ImgAppHome](https://github.com/nicobalbi/PI-Videogames-main/blob/main/client/src/images/homePrint.png)
+![ImgAppLanding](https://github.com/nicobalbi/PI-Videogames-main/blob/master/client/src/images/landingPrint.png)
+![ImgAppHome](https://github.com/nicobalbi/PI-Videogames-main/blob/master/client/src/images/homePrint.png)
 
 ## Introduction
 
