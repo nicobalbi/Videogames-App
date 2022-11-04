@@ -18,7 +18,7 @@ export const SET_VIDEOGAME_DETAIL = 'SET_VIDEOGAME_DETAIL'
 
 export function getVideogamesAll() {
   return (dispatch) => {
-    return axios('http://localhost:3001/videogames')
+    return axios('/videogames')
     .then(res => dispatch({type: GET_VIDEOGAMES_ALL, payload: res.data}))
     .catch(error => console.log(error))
   }
@@ -27,7 +27,7 @@ export function getVideogamesAll() {
 export function getVideogamesSearched(name) {
   return async (dispatch) => {
     try {   
-      let videogames = await axios(`http://localhost:3001/videogames?name=${name}`)
+      let videogames = await axios(`/videogames?name=${name}`)
       return dispatch({type: GET_VIDEOGAMES_SEARCHED, payload: videogames.data})
     } catch (error) {
       console.log(error)
@@ -37,7 +37,7 @@ export function getVideogamesSearched(name) {
 
 export function getVideogameDetail(id) {
   return (dispatch) => {
-    return axios(`http://localhost:3001/videogame/${id}`)
+    return axios(`/videogame/${id}`)
     .then(res => dispatch({type: GET_VIDEOGAME_DETAIL, payload: res.data}))
     .catch(error => console.log(error))
   }
@@ -45,7 +45,7 @@ export function getVideogameDetail(id) {
 
 export function postVideogame(values) {
   return (dispatch) => {
-    return axios.post('http://localhost:3001/videogames', values)
+    return axios.post('/videogames', values)
     .then(res => console.log(res))
     .catch(error => console.log(error))
   }
@@ -53,7 +53,7 @@ export function postVideogame(values) {
 
 export function deleteVideogame(id) {
   return (dispatch) => {
-    return axios.delete(`http://localhost:3001/videogame/${id}`)
+    return axios.delete(`/videogame/${id}`)
     .then(res => console.log(res))
     .catch(error => console.log(error))
   }
@@ -61,7 +61,7 @@ export function deleteVideogame(id) {
 
 export function updateVideogame(id, values) {
   return (dispatch) => {
-    return axios.put(`http://localhost:3001/videogame/${id}`, values)
+    return axios.put(`/videogame/${id}`, values)
     .then(res => console.log(res))
     .catch(error => console.log(error))
   }
@@ -69,7 +69,7 @@ export function updateVideogame(id, values) {
 
 export function getGenres() {
   return (dispatch) => {
-    return axios('http://localhost:3001/genres')
+    return axios('/genres')
     .then(res => dispatch({type: GET_GENRES, payload: res.data}))
     .catch(error => console.log(error))
   }
