@@ -41,6 +41,6 @@
 @media (max-width:500px) {
   .num, .numSelected, .arrow {
     padding: 3px 6px;
-    margin: 4px;
+    margin: 3px;
   }
 }

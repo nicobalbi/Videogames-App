@@ -97,17 +97,17 @@
 
 @media (max-width:500px) {
   .cardName {
-    font-size: 18px;
+    font-size: 16px;
   }
   .card {
     margin: 12px 1px;
-    height: 380px;
-    width: 270px;
+    height: 340px;
+    width: 240px;
   }
   .cardImage {
     padding: 10px;
-    width: 250px;
-    height: 200px;
+    width: 220px;
+    height: 160px;
     margin: 3px auto;
   }
   .genre {
