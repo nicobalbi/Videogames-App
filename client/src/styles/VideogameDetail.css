@@ -261,11 +261,11 @@
 
 @media (max-width:1300px) {
   .imgDetail, .imgDefault {
-    width: 350px;
+    width: 300px;
     height: 250px;
   }
   .description {
-    width: 330px;
+    width: 270px;
     height: 200px;
   }
 }
