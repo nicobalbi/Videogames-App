@@ -5,8 +5,9 @@
   width: fit-content;
   display: flex;
   padding: 5px;
-  justify-content: flex-end;
+  justify-content: space-between;
   height: 25px;
+  flex-wrap: wrap;
 }
 
 .input {
@@ -57,4 +58,28 @@
 .btnSearch:hover {
   background-color: rgb(62, 62, 62);
   color: white;
+}
+
+@media (max-width:1000px) {
+  .search {
+    width: 150px;
+  }
+  .input {
+    width: 80px
+  }
+}
+
+@media (max-width:700px) {
+  .search {
+    width: 80px;
+    height: 50px;
+    justify-content: center;
+  }
+  .input {
+    width: 50px;
+    font-size: 12px;
+  }
+  .btnGlass {
+    height: 20px;
+  }
 }

@@ -94,3 +94,23 @@
 .noneAssigned {
   color: rgb(84, 249, 255);
 }
+
+@media (max-width:500px) {
+  .cardName {
+    font-size: 18px;
+  }
+  .card {
+    margin: 12px 1px;
+    height: 380px;
+    width: 270px;
+  }
+  .cardImage {
+    padding: 10px;
+    width: 250px;
+    height: 200px;
+    margin: 3px auto;
+  }
+  .genre {
+    font-size: 13px;
+  }
+}

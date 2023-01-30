@@ -239,9 +239,10 @@ function Home() {
       
           <div className='loading'>
             <img className='gifLoading' src={gifLoading} alt='Loading'/> 
-          </div> :
+          </div> 
+          :
           
-          <div>
+          <div className='galleryData'>
 
             {videogamesRendered.length > 0 && <Paginate />}
 

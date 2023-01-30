@@ -38,7 +38,7 @@
 
 .deadLinkTitle {
   color: white;
-  margin-top: 5px;
+  margin-top: 25px;
 }
 
 .deadLinkImage {
@@ -47,4 +47,13 @@
   border-radius: 30px;
   /* height: 300px; */
   width: 400px;
+}
+
+@media (max-width:500px) {
+  .deadLinkTitle {
+    font-size: 25px;
+  }
+  .deadLinkImage {
+    width: 300px;
+  }
 }

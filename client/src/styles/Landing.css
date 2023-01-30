@@ -41,3 +41,20 @@
   padding: 10px;
   border-radius: 12px;
 }
+
+@media (max-width:600px) {
+  .button{
+    top: 35%;
+    left: 35%;
+  }
+  .title{
+    left: 0%;
+    width: 96%;
+  }
+}
+
+@media (max-width:530px) {
+  .title{
+    top: 5%;
+  }
+}

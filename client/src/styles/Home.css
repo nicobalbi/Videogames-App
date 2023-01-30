@@ -23,12 +23,13 @@
 .gallery {
   overflow-y: scroll;
   width: 75%;
-  padding-left: 20px;
+  /* padding-left: 20px; */
 }
 
 .topRow {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 a, a:link, a:visited, a:hover, a:focus, a:active {
@@ -79,6 +80,7 @@ a, a:link, a:visited, a:hover, a:focus, a:active {
 
 .titleHome {
   color: white;
+  margin-top: 30px;
 }
 
 .btnCreate {
@@ -101,6 +103,7 @@ a, a:link, a:visited, a:hover, a:focus, a:active {
   justify-content: center;
   padding: 10px;
   margin: 5px auto 10px auto;
+  flex-wrap: wrap;
 }
 
 /* .filterContainer {
@@ -111,7 +114,7 @@ a, a:link, a:visited, a:hover, a:focus, a:active {
 .dropdown, .dropdownSel {
   height: 25px;
   border-radius: 8px;
-  margin: auto 12px;
+  margin: 5px 12px;
 }
 
 .dropdownSel {
@@ -140,8 +143,9 @@ a, a:link, a:visited, a:hover, a:focus, a:active {
 .selected {
   display: inline-block;
   border: 1px solid white;
-  margin: 2px 25px 2px 25px;
-  padding: 5px;
+  /* margin: 2px 25px 2px 25px; */
+  margin: 5px;
+  padding: 3px;
   color: white;
   border-radius: 20px;
   font-size: 12px;
@@ -170,14 +174,23 @@ a, a:link, a:visited, a:hover, a:focus, a:active {
   border-radius: 20px;
 }
 
+.galleryData {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .cards {
-  display: grid;
+  /* display: grid;
   grid-template-columns: repeat(3, 1fr);
-  margin-left: 10px;
+  margin-left: 10px; */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 
 .notFound {
-  margin: 150px 0px 0px 350px;
+  margin: 150px 40px;
   padding: 15px;
   width: fit-content;
   background-color: rgba(0, 0, 0, 0.701);
@@ -191,4 +204,67 @@ a, a:link, a:visited, a:hover, a:focus, a:active {
 .imgNotFound {
   border-radius: 20px;
   width: 370px;
+}
+
+@media (max-width:1200px) {
+  .topRow {
+    justify-content: center;
+  }
+}
+
+@media (max-width:900px) {
+  .strNotFound {
+    font-size: 20px;
+  }
+  .imgNotFound {
+    width: 300px;
+  }
+}
+
+@media (max-width:800px) {
+  .titleHome {
+    font-size: 20px;
+  }
+  .gifLoading {
+    width: 300px;
+  }
+}
+
+@media (max-width:700px) {
+  .dropdown, .dropdownSel {
+    width: 90px;
+    font-size: 10px;
+  }
+  .btnCreate {
+    font-size: 12px;
+    padding: 5px;
+    margin: 25px 5px 50px 5px;
+  }
+  .btnLanding, .btnReload {
+    font-size: 9px;
+  }
+  .btnReset {
+    font-size: 12px;
+  }
+}
+
+@media (max-width:600px) {
+  .strNotFound {
+    font-size: 15px;
+  }
+  .imgNotFound {
+    width: 200px;
+  }
+  .selected, .btnErase {
+    font-size: 10px;
+  }
+}
+
+@media (max-width:500px) {
+  .titleHome {
+    font-size: 15px;
+  }
+  .gifLoading {
+    width: 200px;
+  }
 }

@@ -84,8 +84,6 @@ function VideogameDetail(props) {
 
             <div className='allContainer'>
 
-              <h1 className='titleDetail'>{videogameDetail[0].name}</h1>
-              
               {
                 videogameDetail[0].hasOwnProperty('createdInDb') &&
                 <div className='buttonsContainer'>
@@ -95,6 +93,8 @@ function VideogameDetail(props) {
                   <div className='btnDelete' onClick={handleDelete}>Delete</div>
                 </div>
               }
+
+              <h1 className='titleDetail'>{videogameDetail[0].name}</h1>
 
               <div className='dataContainer'>
 
@@ -111,10 +111,10 @@ function VideogameDetail(props) {
 
               <div className='otherDetails'>
                 
-                <div className='detailCol1'>
+                {/* <div className='detailCol1'>
                   <h3 className='dataTitle'>Website</h3>
                   <div className='data'>{videogameDetail[0].website ? videogameDetail[0].website : '(Website not specified)'}</div>
-                </div>
+                </div> */}
 
                 <div className='detailCol1'>
                   <h3 className='dataTitle'>Released date</h3>

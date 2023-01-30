@@ -4,9 +4,13 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  overflow: hidden;
-  height: auto;
-  min-height: 100vh; 
+  overflow-y: scroll;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  /* min-height: 100vh;  */
+  display: flex;
+  flex-direction: column;
 }
 
 .loadingDetail {
@@ -77,10 +81,13 @@
   /* background-color: rgba(0, 0, 0, 0.884); */
   background-color: rgba(66, 66, 66, 0.94);
   left: 3%;
-  position: absolute;
-  height: 610px;
+  /* position: absolute; */
+  height: fit-content;
   border-radius: 20px;
-  margin-top: 20px;
+  margin: 20px;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .titleDetail {
@@ -89,12 +96,14 @@
 }
 
 .buttonsContainer {
-  display: inline;
+  display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
-  right: 130px;
-  top: 32px
+  /* position: relative; */
+  /* right: 10%; */
+  /* top: 10% */
+  margin-top: 20px;
+  margin-bottom: 5px;
 }
 
 .btnUpdate, .btnDelete {
@@ -103,7 +112,7 @@
   color: white;
   border: 1px solid white;
   border-radius: 12px;
-  margin: auto 20px;
+  margin: auto 30px;
   cursor: pointer;
   display: inline;
 }
@@ -133,14 +142,11 @@
   justify-content: center;
 }
 
-.imgDetailContainer {
-  width: 50%;
-}
-
 .imgDetail, .imgDefault {
   height: 350px;
   border-radius: 20px;
-  margin-left: 120px;
+  /* margin-left: 120px; */
+  margin: auto 20px;
 }
 
 .imgDetail {
@@ -156,7 +162,8 @@
   border: 2px solid white;
   border-radius: 20px;
   padding: 10px;
-  margin: auto 70px
+  /* margin: auto 70px */
+  margin: auto 20px;
 }
 
 .descriptionTitle {
@@ -250,4 +257,56 @@
 .groupPlat {
   border: 1px solid rgb(214, 119, 255);
   color: rgb(214, 119, 255);
+}
+
+@media (max-width:1300px) {
+  .imgDetail, .imgDefault {
+    width: 350px;
+    height: 250px;
+  }
+  .description {
+    width: 330px;
+    height: 200px;
+  }
+}
+
+@media (max-width:800px) {
+  .gifLoadingDetail {
+    width: 300px;
+  }
+  .titleDetail {
+    font-size: 25px;
+  }
+  .dataContainer {
+    flex-direction: column;
+    align-items: center;
+  }
+  .imgDetail, .imgDefault {
+    margin: 10px;
+  }
+  .otherDetails {
+    flex-direction: column;
+    align-items: center;
+    margin: 5px;
+    height: auto;
+  }
+  .detailCol1, .detailCol2, .detailCol3, .detailCol4 {
+    width: auto;
+  }
+}
+
+
+@media (max-width:500px) {
+  .gifLoadingDetail {
+    width: 200px;
+  }
+  .brokenLinkTitle {
+    font-size: 25px;
+  }
+  .brokenLinkImage {
+    width: 200px;
+  }
+  .btnUpdate, .btnDelete {
+    font-size: 15px;
+  }
 }

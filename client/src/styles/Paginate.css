@@ -1,10 +1,11 @@
 .paginate {
-  display: block;
-  width: 75%;
-  margin: 1em auto;
+  /* display: block; */
+  /* width: 75%; */
+  /* margin: 1em auto; */
   text-align: center;
-  position: relative;
-  left: -3.2%;
+  /* position: relative; */
+  /* left: -10%; */
+  padding-left: 0%;
 }
 
 .num, .numSelected, .arrow {
@@ -24,9 +25,9 @@
 }
 
 .arrow {
-  font-size: 15px;
+  font-size: 16px;
   position: relative;
-  top: -1px
+  /* top: -1px */
   /* height: 18px; */
   /* width: 5px; */
   /* padding: 4px 5px; */
@@ -35,4 +36,11 @@
 .num:hover, .numSelected, .arrow:hover {
   background-color: rgb(50, 50, 50);
   color: white;
+}
+
+@media (max-width:500px) {
+  .num, .numSelected, .arrow {
+    padding: 3px 6px;
+    margin: 4px;
+  }
 }
