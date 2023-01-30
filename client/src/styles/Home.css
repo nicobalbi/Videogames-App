@@ -18,6 +18,7 @@
   position: sticky;
   top: 0px;
   border-right: 3px solid black;
+  overflow-y: scroll;
 }
 
 .gallery {
