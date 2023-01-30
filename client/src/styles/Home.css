@@ -21,6 +21,10 @@
   overflow-y: scroll;
 }
 
+.mainButtons::-webkit-scrollbar {
+  display: none;
+}
+
 .gallery {
   overflow-y: scroll;
   width: 75%;
