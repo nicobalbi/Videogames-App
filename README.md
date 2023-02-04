@@ -15,6 +15,8 @@ This project was done as an individual assignment, where I had to apply all the 
 
 Video Games App is a SPA (Single Page Application) that brings data from the API rawg.io and allows the user to search, filter, order and see the details of the video games that are displayed. It also allows the user to create a new video game through a controlled form, update and delete it.
 
+Link to the project: <a href="https://videogames-app-site.onrender.com/" target="_BLANK" alt="git" height="20">Videogames App</a> 
+
 ## Project Goals
 
 - Build a JavaScript App from scratch.
