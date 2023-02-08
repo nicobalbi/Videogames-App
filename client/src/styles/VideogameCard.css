@@ -35,7 +35,7 @@
 }
 
 .cardImage {
-  background-color: rgba(0, 0, 0, 0.242);
+  /* background-color: rgba(0, 0, 0, 0.242); */
   padding: 16px;
   border-radius: 20px;
   width: 290px;
